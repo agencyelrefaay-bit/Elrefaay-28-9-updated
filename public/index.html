@@ -13,7 +13,7 @@
 (function () {
   try {
     var saved = localStorage.getItem('arTheme');
-    var theme = (saved === 'light' || saved === 'dark' || saved === 'colorful') ? saved : 'dark'; // dark يفضل الافتراضي
+    var theme = (saved === 'light' || saved === 'dark') ? saved : 'dark'; // dark يفضل الافتراضي
     document.documentElement.setAttribute('data-theme', theme);
   } catch (e) {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -246,119 +246,6 @@
   --overlay-25: rgba(35,28,16,0.22);
 }
 
-/* ═══════════════════════════════════════════════════════
-   AL-RIFAI ERP — COLORFUL THEME ("Crystal Prism")
-   Concept: a chandelier splits white light into a spectrum — this theme
-   takes that literally. The brand's gold (--gold-0..3) becomes one end of
-   a 5-stop prism gradient (gold → coral → magenta → violet → blue) used
-   for buttons, active states, progress, and glows, on a deep violet-navy
-   base instead of Dark Mode's obsidian. Same token names as the other two
-   themes — no competing system — plus a handful of new --prism-* stops
-   feeding the gradient, and a few opt-in animations (gradient shimmer,
-   glow pulse, card lift) scoped ONLY to this theme via [data-theme=
-   "colorful"] selectors elsewhere in this stylesheet, so Dark/Light are
-   completely unaffected. Respects prefers-reduced-motion (see below).
-═══════════════════════════════════════════════════════ */
-[data-theme="colorful"] {
-  /* Surface scale — deep violet-navy instead of obsidian */
-  --ink-0: #0d0b1a;
-  --ink-1: #15122a;
-  --ink-2: #1c1836;
-  --ink-3: #241f44;
-  --ink-4: #2f2860;
-  --ink-5: #453a8c;
-  --ink-6: #5c4dc4;
-
-  /* Text scale — crisp white down to soft lavender-muted */
-  --cream-0: #ffffff;
-  --cream-1: #e6e0fb;
-  --cream-2: #bdb2e8;
-  --cream-3: #9a8fc9;
-  --cream-4: #7d72ab;
-
-  /* Prism spectrum — the chandelier's refracted light */
-  --prism-1: #ffb347; /* gold   */
-  --prism-2: #ff7a59; /* coral  */
-  --prism-3: #ff4d9e; /* magenta*/
-  --prism-4: #a15ee8; /* violet */
-  --prism-5: #4d7fff; /* blue   */
-  --prism-gradient: linear-gradient(120deg, var(--prism-1), var(--prism-2), var(--prism-3), var(--prism-4), var(--prism-5));
-
-  /* --gold-0..3 map onto the warm end of the spectrum so every existing
-     component (buttons, borders, active-tab text, badges) that already
-     consumes --gold-* automatically becomes prism-colored — no component
-     rewrite needed. */
-  --gold-0: var(--prism-1);
-  --gold-1: var(--prism-2);
-  --gold-2: var(--prism-3);
-  --gold-3: var(--prism-4);
-  --gold-glow: rgba(255, 122, 89, 0.38);
-  --gold-glow-sm: rgba(255, 122, 89, 0.20);
-  --gold-border: rgba(255, 122, 89, 0.45);
-
-  /* Semantic — vivid but still clearly distinct from the prism accent and
-     from each other (never rely on hue alone: labels/icons still carry
-     the meaning, same as the other two themes). */
-  --success: #2ee6a6;
-  --success-bg: rgba(46, 230, 166, 0.14);
-  --danger: #ff4d6d;
-  --danger-bg: rgba(255, 77, 109, 0.14);
-  --warn: #ffb020;
-  --warn-bg: rgba(255, 176, 32, 0.14);
-  --info: #4d9fff;
-  --info-bg: rgba(77, 159, 255, 0.14);
-
-  /* Shadows — glow-forward instead of plain black, matching the livelier
-     surface; still restrained enough not to muddy text. */
-  --shadow-card: 0 2px 20px rgba(10, 6, 30, 0.5), 0 0 0 0.5px var(--overlay-04);
-  --shadow-glow: 0 0 32px var(--gold-glow), 0 2px 20px rgba(10, 6, 30, 0.45);
-  --shadow-input: inset 0 1px 3px rgba(10, 6, 30, 0.35);
-  --shadow-float: 0 10px 36px rgba(10, 6, 30, 0.55), 0 0 0 0.5px var(--overlay-06);
-
-  --overlay-04: rgba(255,255,255,0.05);
-  --overlay-05: rgba(255,255,255,0.06);
-  --overlay-06: rgba(255,255,255,0.08);
-  --overlay-08: rgba(255,255,255,0.10);
-  --overlay-10: rgba(255,255,255,0.13);
-  --overlay-20: rgba(255,255,255,0.24);
-  --overlay-25: rgba(255,255,255,0.30);
-}
-
-/* ── Colorful-only motion: animated prism gradient + glow pulse + card
-   lift. Purely additive — scoped to [data-theme="colorful"], so Dark and
-   Light keep their exact existing (static) appearance and performance
-   characteristics. Disabled entirely under prefers-reduced-motion. ── */
-@media (prefers-reduced-motion: no-preference) {
-  [data-theme="colorful"] .btn-primary {
-    background-size: 300% 100%;
-    animation: prismShift 6s ease-in-out infinite;
-  }
-  [data-theme="colorful"] .nav-item.active {
-    background: linear-gradient(90deg, var(--gold-glow) 0%, transparent 100%);
-    animation: prismGlowPulse 3s ease-in-out infinite;
-  }
-  [data-theme="colorful"] .card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-float);
-  }
-  [data-theme="colorful"] .card {
-    transition: transform var(--t-med) var(--ease-smooth), box-shadow var(--t-med) var(--ease-smooth);
-  }
-  [data-theme="colorful"] .stat-card.card-gold::before {
-    background: var(--prism-gradient);
-    background-size: 300% 300%;
-    animation: prismShift 8s ease-in-out infinite;
-  }
-}
-@keyframes prismShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-@keyframes prismGlowPulse {
-  0%, 100% { box-shadow: 0 0 0 rgba(255,122,89,0); }
-  50% { box-shadow: 0 0 16px var(--gold-glow); }
-}
-
 /* ═══ نظام الـ Breakpoints — مصدر واحد لكل نقاط التوقف، بدل استعلامات عشوائية ═══
    Desktop:          ≥1200px  → لا تغيير خالص (sidebar ثابت، الوضع الحالي)
    Tablet Landscape: 900–1199px → sidebar قابل للطي
@@ -424,6 +311,129 @@ body {
   background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
   pointer-events: none;
 }
+
+/* ═══════════════════════════════════════════════════════
+   النجفة التفاعلية — مبدّل ثيم مميز إضافي (Al-Rifai signature)
+   -----------------------------------------------------------
+   • عنصر عالمي واحد بس (مش مكرر لكل صفحة). في الوضع "full" (شاشات ≥900px)
+     بيعيش كأول عنصر جوه .sidebar فبيتحط طبيعي فوق .sidebar-brand (flex
+     column بيدفعها لتحت من غير أي تداخل)، ودايمًا ظاهر لأن .sidebar نفسها
+     ثابتة الارتفاع (100vh) ومش بتتأثر بسكرول المحتوى.
+   • في الوضع "compact" (شاشات <900px، لما .sidebar تبقى display:none)
+     الـ JS (relocate) بينقل نفس الـ element جوه شريط الأدوات العلوي، وهنا
+     بيتحول شكله لأيقونة صغيرة مضغوطة بدل التجربة الكاملة بالسلسلة —
+     تفاعل السحب الدقيق بإصبع على شاشة صغيرة مش مريح، فبيبقى تفاعل بالضغط.
+   • الإضاءة (مضاءة/مطفأة) بالكامل عن طريق CSS [data-theme] — مفيش state
+     تاني منفصل ممكن يعارض الثيم الفعلي.
+═══════════════════════════════════════════════════════ */
+.chandelier-widget {
+  position: relative;
+  width: 100%;
+  height: 108px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+  --chand-pull: 0px;   /* مسافة السحب الحالية (بكسل) — بيحدّثها JS وقت السحب بس */
+  --chand-swing: 0deg;
+}
+
+.chandelier-fixture {
+  width: 74px;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 4%;
+  transition: filter 0.5s ease;
+  filter: grayscale(55%) brightness(0.6) saturate(60%); /* مطفأة افتراضيًا (Dark) */
+}
+
+[data-theme="light"] .chandelier-fixture {
+  filter: drop-shadow(0 0 5px rgba(232, 184, 74, 0.28)); /* توهج خفيف جدًا بس، من غير ما يلفت الانتباه عن المحتوى */
+}
+
+.chand-bulb-glow { opacity: 0; transition: opacity 0.6s ease; }
+[data-theme="light"] .chand-bulb-glow { opacity: 0.85; }
+
+.chandelier-cord {
+  position: absolute;
+  top: 74px;
+  left: calc(50% - 14px); /* شوية لشمال المنتصف — عشان تبان كعنصر منفصل واضح مش مختفية تحت القطرة المركزية */
+  width: 2px;
+  height: calc(16px + var(--chand-pull));
+  background: linear-gradient(#e8b84a, #b8841a); /* ذهبي ثابت (زي شعار العلامة) في الثيمين الاتنين، مش متغيّر مع الثيم */
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: height 0.45s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+
+/* مقبض السحب — ذهبي ثابت وواضح وبحجم أكبر عشان يبان كعنصر ممكن تمسكه
+   وتسحبه (مش تفصيلة زخرفية صغيرة)، وبيفضل ذهبي واضح في الوضعين الداكن
+   والفاتح (مش هيبهت للبرونزي الغامق زي باقي عناصر التطبيق في الوضع الفاتح) */
+.chandelier-handle {
+  position: absolute;
+  top: calc(74px + 16px + var(--chand-pull));
+  left: calc(50% - 14px);
+  transform: translate(-50%, 0);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 236, 190, 0.6);
+  padding: 0;
+  cursor: grab;
+  background: radial-gradient(circle at 35% 30%, #fbe3a8 0%, #e8b84a 55%, #b8841a 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4), 0 0 0 2px rgba(232,184,74,0.22);
+  transition: top 0.45s cubic-bezier(.34,1.56,.64,1), transform 0.15s ease, box-shadow 0.2s ease;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.chandelier-handle:hover { transform: translate(-50%, 0) scale(1.08); box-shadow: 0 4px 10px rgba(0,0,0,0.45), 0 0 0 3px rgba(232,184,74,0.28); }
+.chandelier-handle:active,
+.chandelier-widget.is-dragging .chandelier-handle { cursor: grabbing; }
+.chandelier-widget.is-dragging .chandelier-cord,
+.chandelier-widget.is-dragging .chandelier-handle { transition: none; }
+
+.chandelier-handle:focus-visible {
+  outline: 2px solid var(--gold-0, #f0c97a);
+  outline-offset: 3px;
+}
+
+/* أرجحة بسيطة وطبيعية بعد أي تفعيل (سحب أو ضغطة) — مش كرتونية، درجات قليلة وبتخمد بسرعة */
+@keyframes chandSwing {
+  0%   { transform: rotate(0deg); }
+  28%  { transform: rotate(-3deg); }
+  58%  { transform: rotate(2deg); }
+  82%  { transform: rotate(-0.8deg); }
+  100% { transform: rotate(0deg); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chandelier-widget.is-toggling .chandelier-fixture { animation: chandSwing 0.6s ease-out; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chandelier-cord, .chandelier-handle { transition: none; }
+  .chandelier-fixture { transition: none; }
+}
+
+/* ── الوضع المضغوط على الشاشات الصغيرة (<900px) — الـ JS بينقل نفس الـ
+   element هنا جوه شريط الأدوات العلوي بدل التجربة الكاملة بالسلسلة ── */
+.chandelier-widget[data-mode="compact"] {
+  position: static;
+  width: auto;
+  height: 32px;
+  padding-top: 0;
+  align-items: center;
+  gap: 2px;
+}
+.chandelier-widget[data-mode="compact"] .chandelier-fixture { width: 24px; }
+.chandelier-widget[data-mode="compact"] .chandelier-cord { display: none; }
+.chandelier-widget[data-mode="compact"] .chandelier-handle {
+  position: static;
+  transform: none;
+  width: 26px;
+  height: 26px;
+}
+.chandelier-widget[data-mode="compact"] .chandelier-handle:hover { transform: scale(1.08); }
 
 .sidebar-brand {
   padding: var(--s-lg) var(--s-md) var(--s-md);
@@ -1111,10 +1121,38 @@ tr:hover .pcolor-cell .pcolor-swatch { transform: scale(1.18); box-shadow: 0 0 0
   .imp-progress > i { animation: none; width: 100%; }
 }
 .product-card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+
+/* ── لمسات مستوحاة من مرجع Sylova: تسمية تصنيف أنيقة مائلة فوق الاسم،
+   وسعر أكبر وأوضح كعنصر بصري رئيسي في الكارت (مش مجرد رقم صغير) ── */
+.product-card-kicker {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: 0.72rem; color: var(--gold-1); opacity: 0.85; letter-spacing: 0.02em;
+  line-height: 1; margin-bottom: -1px;
+}
+.product-card-scrim {
+  position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(180deg, rgba(0,0,0,0.22) 0%, transparent 28%, transparent 100%);
+  opacity: 0; transition: opacity var(--t-med) var(--ease-smooth);
+}
+.product-card:hover .product-card-scrim { opacity: 1; }
+.product-card-quick-edit {
+  position: absolute; top: 8px; left: 8px; width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; border: none; cursor: pointer;
+  background: rgba(20,16,12,0.55); backdrop-filter: blur(6px); color: var(--cream-1);
+  opacity: 0; transform: translateY(-4px) scale(0.9);
+  transition: opacity var(--t-med) var(--ease-smooth), transform var(--t-med) var(--ease-spring);
+}
+.product-card:hover .product-card-quick-edit,
+.product-card:focus-visible .product-card-quick-edit { opacity: 1; transform: translateY(0) scale(1); }
+.product-card-quick-edit:hover { background: var(--gold-1); color: var(--ink-0); }
+@media (hover: none) {
+  /* على الموبايل مفيش hover حقيقي — نسيب زرار التعديل ظاهر بشكل خفيف بدل ما يختفي خالص */
+  .product-card-quick-edit { opacity: 0.85; transform: none; background: rgba(20,16,12,0.65); }
+}
 .product-card-name { font-weight: 700; font-size: 0.88rem; color: var(--cream-0); line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.4em; }
 .product-card-meta { font-size: 0.72rem; color: var(--cream-4); font-family: var(--font-mono); }
 .product-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 6px; }
-.product-card-price { font-weight: 700; font-family: var(--font-display); color: var(--gold-0); font-size: 0.95rem; }
+.product-card-price { font-weight: 700; font-family: var(--font-display); color: var(--gold-0); font-size: 1.15rem; letter-spacing: -0.01em; }
 .product-card-stock { font-size: 0.72rem; color: var(--cream-3); }
 
 /* ── مفتاح تبديل حديث (Active Product, إلخ) — بديل الـ checkbox العادي ── */
@@ -1490,6 +1528,42 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
 }
 
 .filter-search input::placeholder { color: var(--cream-4); }
+
+/* ── شريط بحث/فلترة المنتجات: ملتصق بأعلى منطقة المحتوى (.page-content)،
+   بيختفي مع النزول بالسكرول وبيظهر تاني مع أي طلوع، حتى لو المستخدم لسه
+   في نص القائمة (مش لازم يرجع لأعلى الصفحة). الأنيميشن معمول بـ max-height
+   على قيمة مقاسة فعليًا بالـ JS (--pfb-h) بدل رقم تقريبي، عشان الحركة
+   تتطابق تمامًا مع ارتفاع الشريط الحقيقي (بيتغيّر لما الفلاتر تلف سطرين
+   على الموبايل). visibility بتتأخر لحد ما الإخفاء يخلص عشان الحقول متبقاش
+   قابلة للـ focus بالكيبورد وهي مختفية. الميزة دي معزولة تمامًا عن منطق
+   الفلترة نفسه — لو الـ JS بتاعها فشل لأي سبب، شريط البحث بيفضل ظاهر
+   عادي (فقط بيخسر خاصية الإخفاء التلقائي). ── */
+.products-filters-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: var(--ink-2);
+  overflow: hidden;
+  max-height: var(--pfb-h, 100px);
+  transition: max-height 0.32s cubic-bezier(.4,0,.2,1), opacity 0.2s ease, box-shadow 0.32s ease, visibility 0s linear 0s;
+}
+
+.products-filters-sticky.is-stuck {
+  box-shadow: 0 10px 22px -10px rgba(0,0,0,0.35);
+}
+
+.products-filters-sticky.is-hidden {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  box-shadow: none;
+  transition: max-height 0.32s cubic-bezier(.4,0,.2,1), opacity 0.16s ease, box-shadow 0.2s ease, visibility 0s linear 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .products-filters-sticky, .products-filters-sticky.is-hidden { transition: none; }
+}
 
 /* ── Modal ── */
 .modal-overlay {
@@ -2314,6 +2388,35 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
 .prod-picker-search .form-control { min-height: 34px; padding: 7px 10px; font-size: 0.82rem; }
 .prod-picker-menu.loc-picker-menu { max-height: 280px; }
 
+/* ── شارة "من مورد كذا" — تظهر جوه شاشات السيستم بس (قايمة المنتجات، تفاصيل
+   المنتج) ومالهاش أي وجود في الفاتورة أو أي مستند بيشوفه العميل ── */
+.supplier-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.65rem; padding: 2px 8px; border-radius: 20px;
+  background: var(--overlay-06); color: var(--cream-3);
+  border: 0.5px solid var(--overlay-10, var(--overlay-06));
+  white-space: nowrap;
+}
+.supplier-tag svg { width: 9px; height: 9px; opacity: 0.7; }
+
+/* ── منتجات المورد المرتبطة (صفحة المورد) — chip بيظهر بحركة "pop" لطيفة
+   عند الإضافة، ونقدر نشيله بزرار × واضح ── */
+.sd-linked-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 8px 7px 14px; border-radius: var(--r-md);
+  background: var(--ink-3); border: 0.5px solid var(--overlay-06);
+  font-size: 0.8rem; color: var(--cream-1);
+  animation: impPop 0.35s var(--ease-spring) both;
+}
+.sd-linked-chip .sku { font-family: var(--font-mono); font-size: 0.7rem; color: var(--cream-4); }
+.sd-linked-chip .unlink-btn {
+  width: 20px; height: 20px; border-radius: 50%; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; color: var(--cream-4); transition: all 0.15s;
+}
+.sd-linked-chip .unlink-btn:hover { background: var(--danger-bg, rgba(220,38,38,.12)); color: var(--danger); }
+@media (prefers-reduced-motion: reduce) { .sd-linked-chip { animation: none; } }
+
 /* ── Draft invoice action bar (edit/cancel) inside detail modal ── */
 .draft-edit-banner {
   margin-top: var(--s-md); padding: 10px 14px; border-radius: var(--r-md);
@@ -2456,6 +2559,63 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
 <div id="app" style="display:none;">
   <!-- Sidebar -->
   <aside class="sidebar" role="navigation" aria-label="القائمة الرئيسية">
+    <!-- ═══ النجفة التفاعلية — مبدّل ثيم مميز إضافي (شوف شرح كامل في CSS/JS) ═══
+         عنصر عالمي واحد بس، بيتنقل بالـ JS (relocate) بين هنا (شاشات كبيرة)
+         وجوه شريط الأدوات العلوي (شاشات صغيرة) — مش متكرر في كل صفحة.
+         الزرار العادي لتبديل الثيم (themeToggleBtn) يفضل شغال بالكامل
+         بغض النظر عن العنصر ده. -->
+    <div class="chandelier-widget" id="chandelierWidget" data-mode="full">
+      <svg class="chandelier-fixture" id="chandelierFixture" viewBox="0 0 100 78" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="chandGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f0c97a"/>
+            <stop offset="55%" stop-color="#e8b84a"/>
+            <stop offset="100%" stop-color="#b8841a"/>
+          </linearGradient>
+          <radialGradient id="chandBulbGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffdfa0" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#ffdfa0" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- طبق تثبيت بالسقف + الساق + الكرة العلوية -->
+        <rect x="42" y="0" width="16" height="4" rx="2" fill="url(#chandGoldGrad)"/>
+        <line x1="50" y1="4" x2="50" y2="16" stroke="url(#chandGoldGrad)" stroke-width="1.4"/>
+        <path d="M50 16 L52.6 22 L50 24.6 L47.4 22 Z" fill="url(#chandGoldGrad)"/>
+
+        <!-- قوس التاج الرئيسي -->
+        <path d="M18 30 Q50 6 82 30" stroke="url(#chandGoldGrad)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+
+        <!-- الذراع الأوسط + القطرة المركزية (أكبر قطرة) -->
+        <line x1="50" y1="30" x2="50" y2="36" stroke="url(#chandGoldGrad)" stroke-width="1.3"/>
+        <circle class="chand-bulb-glow" cx="50" cy="47" r="13" fill="url(#chandBulbGlow)"/>
+        <ellipse class="chand-bulb" cx="50" cy="47" rx="5" ry="8.5" fill="url(#chandGoldGrad)"/>
+
+        <!-- ذراعان داخليان -->
+        <line x1="34" y1="31.5" x2="34" y2="36.5" stroke="url(#chandGoldGrad)" stroke-width="1.1"/>
+        <circle class="chand-bulb-glow" cx="34" cy="44.5" r="9.5" fill="url(#chandBulbGlow)"/>
+        <ellipse class="chand-bulb" cx="34" cy="44.5" rx="3.6" ry="6" fill="url(#chandGoldGrad)" opacity="0.92"/>
+
+        <line x1="66" y1="31.5" x2="66" y2="36.5" stroke="url(#chandGoldGrad)" stroke-width="1.1"/>
+        <circle class="chand-bulb-glow" cx="66" cy="44.5" r="9.5" fill="url(#chandBulbGlow)"/>
+        <ellipse class="chand-bulb" cx="66" cy="44.5" rx="3.6" ry="6" fill="url(#chandGoldGrad)" opacity="0.92"/>
+
+        <!-- ذراعان خارجيان -->
+        <line x1="21" y1="30.5" x2="21" y2="34" stroke="url(#chandGoldGrad)" stroke-width="0.9"/>
+        <circle class="chand-bulb-glow" cx="21" cy="39.5" r="6.5" fill="url(#chandBulbGlow)"/>
+        <ellipse class="chand-bulb" cx="21" cy="39.5" rx="2.6" ry="4.2" fill="url(#chandGoldGrad)" opacity="0.8"/>
+
+        <line x1="79" y1="30.5" x2="79" y2="34" stroke="url(#chandGoldGrad)" stroke-width="0.9"/>
+        <circle class="chand-bulb-glow" cx="79" cy="39.5" r="6.5" fill="url(#chandBulbGlow)"/>
+        <ellipse class="chand-bulb" cx="79" cy="39.5" rx="2.6" ry="4.2" fill="url(#chandGoldGrad)" opacity="0.8"/>
+      </svg>
+
+      <!-- سلسلة السحب — بتنزل شوية على شمال المنتصف (مش بالظبط تحت القطرة
+           المركزية) عشان تبان كعنصر تفاعلي منفصل وواضح، مش جزء زخرفي بس. -->
+      <div class="chandelier-cord" id="chandelierCord" aria-hidden="true"></div>
+      <button type="button" class="chandelier-handle" id="chandelierHandle" aria-label="اسحب النجفة لتبديل الثيم"></button>
+    </div>
+
     <div class="sidebar-brand">
       <div class="brand-emblem">
         <div class="brand-crystal">
@@ -2589,10 +2749,9 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
       <div id="topbarUser" style="font-size:0.78rem; color:var(--cream-4);"></div>
 
       <!-- Theme toggle (Dark/Light) -->
-      <button class="btn btn-icon btn-subtle" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الثيم (داكن/فاتح/ملوّن)" aria-label="تبديل الثيم (داكن/فاتح/ملوّن)">
+      <button class="btn btn-icon btn-subtle" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الثيم (داكن/فاتح)" aria-label="تبديل الثيم (داكن/فاتح)">
         <svg id="themeToggleIconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         <svg id="themeToggleIconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        <svg id="themeToggleIconPrism" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.9L12 3z"/><path d="M19 14l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8.8-1.9z"/></svg>
       </button>
 
       <!-- Notification bell -->
@@ -2679,13 +2838,28 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
           </div>
         </div>
 
-        <div class="filters-bar">
+        <!-- ═══ شريط البحث والفلترة — يختفي تلقائيًا مع السكرول لتحت ويظهر
+             فورًا مع أي سكرول لفوق (حتى لو بسيط)، عشان المستخدم يقدر يبحث
+             أو يفلتر وهو لسه في نص القائمة من غير ما يضطر يرجع لأعلى الصفحة.
+             الشريط بيبقى "ملتصق" (sticky) بأعلى منطقة المحتوى، والـ JS بتاع
+             ده كله في chandelier / #productsFiltersSticky بالأسفل. ═══ -->
+        <div class="products-filters-sticky" id="productsFiltersSticky">
+        <div class="filters-bar" id="productsFiltersBar">
           <div class="filter-search">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--cream-4); flex-shrink:0;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" placeholder="بحث بالاسم، الكود، الباركود..." id="productSearch" oninput="filterProducts()"/>
           </div>
+          <select class="filter-select" id="productSearchField" onchange="filterProducts()" title="ابحث في حقل معيّن بدل كل الحقول — يمنع تطابق غير مقصود (مثلاً كود يظهر كجزء من باركود منتج تاني)">
+            <option value="">🔍 الكل</option>
+            <option value="name">الاسم فقط</option>
+            <option value="sku">الكود فقط</option>
+            <option value="barcode">الباركود فقط</option>
+          </select>
           <select class="filter-select" id="productCategoryFilter" onchange="filterProducts()">
             <option value="">كل التصنيفات</option>
+          </select>
+          <select class="filter-select" id="productSupplierFilter" onchange="filterProducts()">
+            <option value="">كل الموردين</option>
           </select>
           <select class="filter-select" id="productStatusFilter" onchange="filterProducts()">
             <option value="">كل المنتجات</option>
@@ -2711,6 +2885,7 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
           </div>
           <span class="text-xs text-muted" id="productCount"></span>
         </div>
+        </div><!-- end #productsFiltersSticky -->
 
         <div id="productsCardView" class="product-card-grid"></div>
         <div id="productsDataView" class="rdv-container" style="display:none;">
@@ -3194,6 +3369,28 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
                 </table>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- المنتجات المرتبطة بالمورد -->
+        <div class="section-card" style="margin-top:var(--s-lg);">
+          <div class="section-card-header">
+            <span class="section-card-title">المنتجات المرتبطة بهذا المورد</span>
+            <div style="display:flex;align-items:center;gap:var(--s-sm);">
+              <span class="text-xs text-muted" id="sdProductsCount"></span>
+              <button class="btn btn-xs btn-subtle" onclick="openBulkSupplierLinkModal(state.currentSupplierId, document.getElementById('sdName').textContent)">+ ربط بالجملة</button>
+            </div>
+          </div>
+          <div class="section-card-body">
+            <div style="position:relative;margin-bottom:var(--s-md);max-width:420px;">
+              <input type="text" class="form-control" id="sdProductSearchInput"
+                     placeholder="ابحث بالاسم أو الكود لربط منتج..."
+                     oninput="renderSdProductPicker(this.value)"
+                     onfocus="renderSdProductPicker(this.value)"
+                     onclick="event.stopPropagation()" autocomplete="off">
+              <div class="loc-picker-menu" id="sdProductPickerResults" style="display:none;position:absolute;top:100%;right:0;left:0;margin-top:4px;"></div>
+            </div>
+            <div id="sdLinkedProductsList" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
           </div>
         </div>
       </div>
@@ -4065,6 +4262,46 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
   </div>
 </div>
 
+<!-- Bulk Supplier-Link Modal -->
+<div class="modal-overlay" id="bulkSupplierLinkModal">
+  <div class="modal" style="max-width:820px;">
+    <div class="modal-header">
+      <div class="modal-title">ربط منتجات بالجملة — <span id="bslSupplierName"></span></div>
+      <button class="modal-close" onclick="closeModal('bulkSupplierLinkModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:var(--s-sm);flex-wrap:wrap;margin-bottom:var(--s-md);">
+        <input type="text" class="form-control" id="bslSearch" placeholder="بحث بالاسم أو الكود..." style="flex:2;min-width:180px;" oninput="renderBulkLinkList()">
+        <select class="filter-select" id="bslCategory" onchange="renderBulkLinkList()" style="flex:1;min-width:140px;">
+          <option value="">كل التصنيفات</option>
+        </select>
+        <select class="filter-select" id="bslSort" onchange="renderBulkLinkList()" style="flex:1;min-width:140px;">
+          <option value="name_asc">الاسم (أ-ي)</option>
+          <option value="name_desc">الاسم (ي-أ)</option>
+          <option value="price_desc">السعر (الأعلى أولاً)</option>
+          <option value="price_asc">السعر (الأقل أولاً)</option>
+        </select>
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--cream-3);white-space:nowrap;cursor:pointer;">
+          <input type="checkbox" id="bslUnassignedOnly" onchange="renderBulkLinkList()" style="accent-color:var(--gold-1);">
+          بدون مورد فقط
+        </label>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <label style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--cream-4);cursor:pointer;">
+          <input type="checkbox" id="bslSelectAll" onchange="toggleBslSelectAll(this.checked)" style="accent-color:var(--gold-1);">
+          تحديد كل الظاهر
+        </label>
+        <span class="text-xs text-muted" id="bslSelectedCount">0 محدد</span>
+      </div>
+      <div id="bslListBox" style="max-height:360px;overflow-y:auto;border:0.5px solid var(--overlay-06);border-radius:var(--r-md);"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-subtle" onclick="closeModal('bulkSupplierLinkModal')">إغلاق</button>
+      <button class="btn btn-primary" id="bslLinkBtn" onclick="submitBulkLink()">ربط المحدد بالمورد</button>
+    </div>
+  </div>
+</div>
+
 <!-- Adjust Modal -->
 <div class="modal-overlay" id="adjustModal">
   <div class="modal">
@@ -4075,9 +4312,19 @@ table.rdv-compact-table tbody td { padding: 11px var(--s-sm); font-size: 0.82rem
     <div class="modal-body">
       <div class="form-group">
         <label class="form-label">المنتج *</label>
-        <select class="form-control" id="adjProduct">
-          <option value="">اختر منتجاً...</option>
-        </select>
+        <div class="loc-picker" id="adjProdPicker">
+          <button type="button" class="form-control loc-picker-btn empty" id="adjProdPickerBtn" onclick="toggleAdjProdPicker()">
+            <span class="lp-label" id="adjProdPickerLabel">اختر منتجاً...</span>
+            <svg class="lp-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <input type="hidden" id="adjProduct" value="">
+          <div class="loc-picker-menu prod-picker-menu" id="adjProdPickerMenu" style="display:none;">
+            <div class="prod-picker-search">
+              <input type="text" class="form-control" id="adjProdPickerQ" placeholder="ابحث بالاسم أو الكود..." oninput="renderAdjProdPickerMenu(this.value)" onclick="event.stopPropagation()" autocomplete="off">
+            </div>
+            <div id="adjProdPickerResults"></div>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label class="form-label">الموقع *</label>
@@ -4628,9 +4875,9 @@ const state = {
 // بمزامنة شكل الزرار في التوب بار + حفظ الاختيار + تحديث ألوان الرسوم
 // البيانية والـ meta theme-color لما المستخدم يبدّل الثيم فعليًا.
 const THEME_STORAGE_KEY = 'arTheme';
-const THEME_ORDER = ['dark', 'light', 'colorful'];
-const THEME_COLOR = { dark: '#0f0d10', light: '#faf7f0', colorful: '#15122a' };
-const THEME_LABEL = { dark: 'الوضع الداكن', light: 'الوضع الفاتح', colorful: 'الوضع الملوّن' };
+const THEME_ORDER = ['dark', 'light'];
+const THEME_COLOR = { dark: '#0f0d10', light: '#faf7f0' };
+const THEME_LABEL = { dark: 'الوضع الداكن', light: 'الوضع الفاتح' };
 
 function getTheme() {
   const t = document.documentElement.getAttribute('data-theme');
@@ -4648,7 +4895,6 @@ function syncThemeToggleUI(theme) {
   const icons = {
     dark: document.getElementById('themeToggleIconMoon'),
     light: document.getElementById('themeToggleIconSun'),
-    colorful: document.getElementById('themeToggleIconPrism'),
   };
   Object.entries(icons).forEach(([key, el]) => { if (el) el.style.display = key === theme ? '' : 'none'; });
 
@@ -4665,6 +4911,7 @@ function setTheme(theme, opts) {
   try { localStorage.setItem(THEME_STORAGE_KEY, theme); } catch (e) {}
   applyThemeColorMeta(theme);
   syncThemeToggleUI(theme);
+  if (window.__chandelierSyncLabel) { try { window.__chandelierSyncLabel(); } catch (e) {} }
   if (!opts || !opts.silent) refreshChartsForTheme();
 }
 
@@ -4678,6 +4925,128 @@ function toggleTheme() {
 // قبل تحميل باقي الصفحة (من غير ما نعيد رسم الرسوم البيانية — لسه معملهاش
 // render أصلاً في أول تحميل).
 setTheme(getTheme(), { silent: true });
+
+// ── النجفة التفاعلية (Chandelier Theme Switcher) ──────────────────────────
+// ميزة إضافية وليست بديلة: زرار الثيم العادي فوق (themeToggleBtn) بيفضل
+// شغال زي ما هو تمامًا بغض النظر عن أي حاجة هنا. النجفة دي عنصر عالمي واحد
+// بس (مش متكرر في كل صفحة) — بيتنقل بالـ JS بين أعلى الشريط الجانبي على
+// الشاشات الكبيرة، وجوه شريط الأدوات العلوي على الشاشات الصغيرة (نفس الـ
+// element بالظبط، مفيش تكرار markup ولا event listeners).
+//
+// مصدر الحقيقة الوحيد للثيم يفضل زي ما هو (setTheme/getTheme فوق) — شكل
+// النجفة (مضاءة/مطفأة) بيتحدد بالكامل عن طريق CSS مرتبط بـ [data-theme]
+// على <html>، مفيش أي state تاني منفصل ممكن يتعارض معاه. أي تفاعل (سحب أو
+// ضغطة/إنتر) بينادي toggleTheme() الموجودة بالفعل، زي الزرار العادي بالظبط.
+//
+// أمان الفشل: كل حاجة هنا لفّة بـ try/catch — لو أي جزء فشل (مثلاً المتصفح
+// مش بيدعم Pointer Events، أو عنصر مش موجود)، زرار الثيم العادي والثيم نفسه
+// بيفضلوا شغالين عادي، النجفة بس مابتشتغلش.
+(function () {
+  function safe(fn) { try { return fn(); } catch (e) { /* صامت عمدًا — شوف الشرح فوق */ } }
+
+  let widget, handle;
+  let dragging = false, startY = 0, startTime = 0, moved = 0;
+  const MAX_PULL = 34;      // أقصى مسافة سحب "طبيعية" قبل ما نبدأ مقاومة مطاطية
+  const TRIGGER_PULL = 20;  // مسافة السحب اللي لو اتعدّت بتفعّل تبديل الثيم
+  const TAP_MOVE_LIMIT = 6; // حركة أقل من كده بتتحسب "ضغطة" مش سحب فعلي
+
+  function prefersReducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function updateLabel() {
+    if (!handle) return;
+    const current = getTheme();
+    const next = THEME_ORDER[(THEME_ORDER.indexOf(current) + 1) % THEME_ORDER.length];
+    const label = `النجفة — الوضع الحالي: ${THEME_LABEL[current]} — اسحب لأسفل أو اضغط للتبديل إلى ${THEME_LABEL[next]}`;
+    handle.setAttribute('aria-label', label);
+    handle.setAttribute('title', label);
+  }
+
+  function setPull(px) { if (widget) widget.style.setProperty('--chand-pull', px + 'px'); }
+
+  function activate() {
+    if (typeof toggleTheme !== 'function') return;
+    toggleTheme();
+    updateLabel();
+    if (!prefersReducedMotion() && widget) {
+      widget.classList.add('is-toggling');
+      setTimeout(() => widget.classList.remove('is-toggling'), 650);
+    }
+  }
+
+  function onPointerDown(e) {
+    dragging = true; moved = 0; startY = e.clientY; startTime = Date.now();
+    if (widget) widget.classList.add('is-dragging');
+    safe(() => handle.setPointerCapture(e.pointerId));
+  }
+
+  function onPointerMove(e) {
+    if (!dragging) return;
+    let d = e.clientY - startY;
+    if (d < 0) d = 0; // مينفعش السلسلة "تتدفع" لفوق
+    moved = Math.max(moved, d);
+    const visual = d > MAX_PULL ? MAX_PULL + (d - MAX_PULL) * 0.25 : d;
+    setPull(Math.min(visual, MAX_PULL * 1.6));
+  }
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    if (widget) widget.classList.remove('is-dragging');
+    setPull(0);
+    const elapsed = Date.now() - startTime;
+    const isTap = moved < TAP_MOVE_LIMIT && elapsed < 500;
+    const isDragTrigger = moved >= TRIGGER_PULL;
+    if (isTap || isDragTrigger) activate();
+  }
+
+  function onClick(e) {
+    // مسار لوحة المفاتيح فقط: Enter/Space على <button> بيطلّعوا click بـ
+    // detail=0. تفاعل الماوس/اللمس اتعالج بالكامل فوق في pointerup/endDrag،
+    // فمنعرفش هنا تاني عشان مانفعّلش الثيم مرتين لنفس الضغطة.
+    if (e.detail === 0) activate();
+  }
+
+  function relocate() {
+    if (!widget) return;
+    const sidebar = document.querySelector('.sidebar');
+    const themeBtn = document.getElementById('themeToggleBtn');
+    if (!sidebar || !themeBtn || !themeBtn.parentElement) return;
+    const isRoomy = window.matchMedia('(min-width: 900px)').matches;
+    if (isRoomy) {
+      if (sidebar.firstElementChild !== widget) sidebar.insertBefore(widget, sidebar.firstChild);
+      widget.setAttribute('data-mode', 'full');
+    } else {
+      if (widget.nextElementSibling !== themeBtn) themeBtn.parentElement.insertBefore(widget, themeBtn);
+      widget.setAttribute('data-mode', 'compact');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => safe(() => {
+    widget = document.getElementById('chandelierWidget');
+    handle = document.getElementById('chandelierHandle');
+    if (!widget || !handle) return;
+
+    handle.addEventListener('pointerdown', (e) => safe(() => onPointerDown(e)));
+    handle.addEventListener('pointermove', (e) => safe(() => onPointerMove(e)));
+    handle.addEventListener('pointerup', () => safe(endDrag));
+    handle.addEventListener('pointercancel', () => safe(endDrag));
+    handle.addEventListener('click', (e) => safe(() => onClick(e)));
+
+    updateLabel();
+    relocate();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => safe(relocate), 150);
+    });
+  }));
+
+  // بتتنادى من setTheme() (فوق) بعد أي تغيير ثيم — حتى لو حصل من الزرار
+  // العادي مش من النجفة — عشان نص aria-label يفضل متزامن مع الحالة الفعلية.
+  window.__chandelierSyncLabel = updateLabel;
+})();
 
 // ── API ──
 const API = {
@@ -5372,7 +5741,7 @@ function navigate(page, entity = null) {
 
   // Load page data
   if (page === 'dashboard') loadDashboard();
-  if (page === 'products') renderProducts();
+  if (page === 'products') { renderProducts(); if (window.resetProductsFiltersBar) resetProductsFiltersBar(); }
   if (page === 'inventory') loadInventory();
   if (page === 'transfers') loadTransfers();
   if (page === 'locations') renderLocations();
@@ -5525,9 +5894,24 @@ async function loadProducts() {
     const data = await API.get('/products');
     state.products = data.products || [];
     renderProducts();
+    loadSupplierFilterOptions();
   } catch (err) {
     toast('فشل تحميل المنتجات: ' + err.message, 'danger');
   }
+}
+
+// تعبئة فلتر "المورد" في قايمة المنتجات — بيجيب قايمة الموردين مرة واحدة
+// بس لو لسه مش محملة (عشان صفحة المنتجات ممكن تتفتح قبل صفحة الموردين)
+async function loadSupplierFilterOptions() {
+  const sel = document.getElementById('productSupplierFilter');
+  if (!sel) return;
+  try {
+    if (!state.suppliers || !state.suppliers.length) {
+      const data = await API.get('/suppliers');
+      state.suppliers = data.suppliers || [];
+    }
+    sel.innerHTML = '<option value="">كل الموردين</option>' + state.suppliers.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+  } catch (err) { /* الفلتر اختياري — مش حرج لو فشل */ }
 }
 
 const PM_COLOR_SWATCHES = { white: '#f5f2ea', black: '#14110c', gold: '#d4a030' };
@@ -5591,15 +5975,27 @@ function setProductViewMode(mode) {
 
 function renderProducts() {
   const search = (document.getElementById('productSearch')?.value || '').toLowerCase();
+  const searchField = document.getElementById('productSearchField')?.value || '';
   const catFilter = document.getElementById('productCategoryFilter')?.value || '';
+  const supplierFilter = document.getElementById('productSupplierFilter')?.value || '';
   const statusFilter = document.getElementById('productStatusFilter')?.value || '';
   const sortBy = document.getElementById('productSortFilter')?.value || 'name_asc';
 
   let filtered = state.products.filter(p => {
-    const matchSearch = !search || p.name.toLowerCase().includes(search) || (p.sku || '').toLowerCase().includes(search) || (p.barcode || '').includes(search);
+    // بحث محدَّد الحقل: لو المستخدم اختار "الكود فقط" مثلاً، البحث بيقتصر
+    // على العمود ده بس — يمنع تطابق غير مقصود (زي بحث عن "966" فيرجع منتج
+    // باركوده فيه "966" بالغلط بدل الكود المقصود).
+    let matchSearch = true;
+    if (search) {
+      if (searchField === 'name') matchSearch = p.name.toLowerCase().includes(search);
+      else if (searchField === 'sku') matchSearch = (p.sku || '').toLowerCase().includes(search);
+      else if (searchField === 'barcode') matchSearch = (p.barcode || '').includes(search);
+      else matchSearch = p.name.toLowerCase().includes(search) || (p.sku || '').toLowerCase().includes(search) || (p.barcode || '').includes(search);
+    }
     const matchCat = !catFilter || String(p.category_id) === catFilter;
+    const matchSupplier = !supplierFilter || (p.suppliers || []).some(s => String(s.id) === supplierFilter);
     const matchStatus = !statusFilter || (statusFilter === 'active' && p.is_active) || (statusFilter === 'inactive' && !p.is_active) || (statusFilter === 'low' && p.is_low_stock) || (statusFilter === 'out' && p.total_quantity <= 0);
-    return matchSearch && matchCat && matchStatus;
+    return matchSearch && matchCat && matchSupplier && matchStatus;
   });
 
   filtered = filtered.slice().sort((a, b) => {
@@ -5644,12 +6040,18 @@ function renderProducts() {
             ? `<img src="${p.image_path}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                <div class="product-card-img-placeholder" style="display:none;"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>`
             : `<div class="product-card-img-placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>`}
+          <div class="product-card-scrim"></div>
           ${productColorChip(p)}
           <div class="product-card-badges">${statusBadge}</div>
+          <button type="button" class="product-card-quick-edit" title="تعديل سريع" onclick="event.stopPropagation(); editProduct(${p.id})">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
         </div>
         <div class="product-card-body">
+          ${p.category_name ? `<div class="product-card-kicker">${escHtml(p.category_name)}</div>` : ''}
           <div class="product-card-name">${p.name}</div>
           <div class="product-card-meta">${p.sku || '—'}${measureLabel}</div>
+          ${(p.suppliers && p.suppliers.length) ? `<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px;">${p.suppliers.map(s => `<span class="supplier-tag" title="من مورد: ${escHtml(s.name)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-6 9 6v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/></svg>${escHtml(s.name)}</span>`).join('')}</div>` : ''}
           <div class="product-card-footer">
             <span class="product-card-price">${p.sale_price.toLocaleString('ar-EG')} ج.م</span>
             <span class="product-card-stock">${fmtN(p.total_quantity, 2)} ${unitLabel}</span>
@@ -5666,7 +6068,10 @@ function renderProducts() {
         : ''}
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" ${p.image_path ? 'style="display:none"' : ''}><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
     </div>
-    <div><div style="font-weight:600;color:var(--cream-0);">${p.name}</div></div>
+    <div>
+      <div style="font-weight:600;color:var(--cream-0);">${p.name}</div>
+      ${(p.suppliers && p.suppliers.length) ? `<div style="margin-top:2px;display:flex;flex-wrap:wrap;gap:4px;">${p.suppliers.map(s => `<span class="supplier-tag">${escHtml(s.name)}</span>`).join('')}</div>` : ''}
+    </div>
   </div>`;
 
   renderResponsiveDataView('productsDataView', {
@@ -5698,6 +6103,85 @@ function renderProducts() {
 }
 RDV_PAGE_REFRESHERS['products'] = renderProducts;
 function filterProducts() { renderProducts(); }
+
+// ── شريط بحث/فلترة المنتجات: إخفاء تلقائي مع النزول، ظهور فوري مع الطلوع ──
+// معزولة في IIFE خاص بيها ومحمية بـ try/catch في كل نقطة تفاعل، عشان أي
+// خطأ هنا (مثلاً لو حد غيّر بنية الصفحة مستقبلاً) میخصش يوقف باقي الصفحة —
+// أسوأ حالة: الشريط يفضل ظاهر عادي زي ما كان قبل الميزة دي.
+(function () {
+  const THRESHOLD = 6;       // أقل مسافة سكرول (بكسل) قبل ما نستجيب — بيمنع الاهتزاز/الرجفة عند لمسات صغيرة
+  const TOP_GUARD = 4;       // لما نكون قريبين من أعلى القائمة خالص، سيب الشريط ظاهر دايمًا
+  let lastY = 0;
+  let ticking = false;
+
+  function refs() {
+    const wrap = document.getElementById('productsFiltersSticky');
+    const bar = document.getElementById('productsFiltersBar');
+    return wrap && bar ? { wrap, bar } : null;
+  }
+
+  function measure() {
+    const r = refs();
+    if (!r) return;
+    const h = r.bar.getBoundingClientRect().height;
+    if (h > 0) r.wrap.style.setProperty('--pfb-h', h + 'px');
+  }
+
+  function show(wrap) { wrap.classList.remove('is-hidden'); }
+  function hide(wrap) { wrap.classList.add('is-hidden'); }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      try {
+        if (typeof state === 'undefined' || state.currentPage !== 'products') return;
+        const r = refs();
+        const container = document.querySelector('.page-content');
+        if (!r || !container) return;
+
+        const y = container.scrollTop;
+        const delta = y - lastY;
+
+        if (y <= TOP_GUARD) {
+          show(r.wrap);
+          r.wrap.classList.remove('is-stuck');
+          lastY = y;
+          return;
+        }
+        r.wrap.classList.add('is-stuck');
+
+        if (Math.abs(delta) < THRESHOLD) return;
+        if (delta > 0) hide(r.wrap); else show(r.wrap);
+        lastY = y;
+      } catch (e) { /* الفشل هنا لازم يبقى صامت — البحث/الفلترة نفسها لازم تفضل شغالة */ }
+    });
+  }
+
+  // بتتنادى من navigate() كل ما المستخدم يدخل صفحة المنتجات — بترجّع الشريط
+  // ظاهر وتقيس ارتفاعه من جديد (ممكن يتغيّر لو الشاشة اتغيّر حجمها أو
+  // الفلاتر لفّت سطر تاني)، وتاخد نقطة سكرول البداية الصحيحة.
+  window.resetProductsFiltersBar = function () {
+    try {
+      const r = refs();
+      if (!r) return;
+      measure();
+      show(r.wrap);
+      const container = document.querySelector('.page-content');
+      lastY = container ? container.scrollTop : 0;
+      r.wrap.classList.toggle('is-stuck', lastY > TOP_GUARD);
+    } catch (e) { /* silent — نفس منطق الحماية أعلاه */ }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.page-content');
+    if (container) container.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      if (typeof state !== 'undefined' && state.currentPage === 'products') measure();
+    });
+  });
+})();
 
 function togglePmThresholdMode() {
   const mode = document.getElementById('pmLowStockMode').value;
@@ -6315,9 +6799,37 @@ function renderInventoryCountScreen() {
       <div id="icSearchResults" style="margin-top:var(--s-sm); display:flex; flex-direction:column; gap:6px; max-height:280px; overflow-y:auto;"></div>
     </div>
 
+    <!-- ترشيح المنتجات اللي لسه محتاجة عدّ — بدل ما تسيرش كل شوية، دول أول
+         منتجات لسه عليها الدور، بضغطة واحدة تختارها وتكمل -->
+    <div id="icNextUpArea" style="max-width:520px; margin:var(--s-md) auto 0;"></div>
+
     <div id="icConfirmArea" style="max-width:520px; margin:var(--s-md) auto 0;"></div>
   `;
   document.getElementById('icSearchInput').focus();
+  icLoadNextUp();
+}
+
+// قائمة "التالي للعدّ" — أول منتجات لسه ماتعدّتش، لتسريع الجرد من غير
+// الحاجة لكتابة اسم كل منتج على حدة
+async function icLoadNextUp() {
+  const box = document.getElementById('icNextUpArea');
+  if (!box) return;
+  try {
+    const data = await API.get(`/inventory-counts/sessions/${state.invCount.session.id}/review?filter=uncounted`);
+    const list = (data.entries || []).slice(0, 8);
+    if (!list.length) { box.innerHTML = ''; return; }
+    box.innerHTML = `
+      <div style="font-size:0.72rem; color:var(--cream-4); margin-bottom:6px;">التالي للعدّ (${fmtN(data.entries.length)} لسه متبقّي)</div>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        ${list.map(p => {
+          const mapped = { id: p.product_id, name: p.product_name, sku: p.sku, barcode: p.barcode, unit: p.unit, sale_price: p.sale_price, category_name: p.category_name || null };
+          return `
+          <button type="button" class="btn btn-subtle btn-sm" style="font-size:0.78rem;" onclick='icSelectProductObj(${JSON.stringify(mapped).replace(/'/g,"&#39;")})'>
+            ${p.product_name} <span class="mono" style="opacity:.6;">${p.sku||''}</span>
+          </button>`;
+        }).join('')}
+      </div>`;
+  } catch (e) { box.innerHTML = ''; }
 }
 
 let _icSearchTimer = null;
@@ -6380,6 +6892,10 @@ function icSelectProductObj(p) {
         <button class="btn btn-subtle btn-icon" onclick="icStepQty(1)" aria-label="زيادة">+</button>
       </div>
 
+      <label class="form-label" style="margin-top:var(--s-md);">سعر البيع (اختياري — لتحديثه أثناء الجرد)</label>
+      <input type="number" inputmode="decimal" class="form-control" id="icSalePriceInput" min="0" step="0.01"
+             value="${p.sale_price ?? ''}" placeholder="اتركه فاضي لعدم التغيير">
+
       <div style="display:flex; gap:var(--s-sm); margin-top:var(--s-md);">
         <button class="btn btn-primary" style="flex:1;" onclick="icSaveCount()">حفظ العدّ</button>
         <button class="btn btn-subtle" onclick="icCancelSelection()">إلغاء</button>
@@ -6406,11 +6922,12 @@ async function icSaveCount() {
   const p = state.invCount.selectedProduct;
   const qty = document.getElementById('icQtyInput').value;
   if (qty === '' || qty === null) { toast('يرجى إدخال الكمية المعدودة', 'warn'); return; }
+  const salePriceRaw = document.getElementById('icSalePriceInput')?.value;
 
   try {
-    const res = await API.post(`/inventory-counts/sessions/${state.invCount.session.id}/entries`, {
-      product_id: p.id, counted_qty: parseFloat(qty),
-    });
+    const body = { product_id: p.id, counted_qty: parseFloat(qty) };
+    if (salePriceRaw !== '' && salePriceRaw !== undefined) body.sale_price = parseFloat(salePriceRaw);
+    const res = await API.post(`/inventory-counts/sessions/${state.invCount.session.id}/entries`, body);
     toast(res.is_recount ? 'تم تحديث العدّ' : 'تم حفظ العدّ', 'success');
     icCancelSelection();
     // تحديث نسبة التقدّم من غير إعادة رسم الشاشة كلها
@@ -6421,38 +6938,46 @@ async function icSaveCount() {
 }
 
 // ── مراجعة الجرد ──
-async function icOpenReview(filter = 'all') {
+async function icOpenReview(filter = 'all', search = '') {
   state.invCount.reviewFilter = filter;
+  state.invCount.reviewSearch = search;
   const s = state.invCount.session;
   const root = document.getElementById('inventoryCountRoot');
   root.innerHTML = `<div style="padding:var(--s-xl); text-align:center; color:var(--cream-4);">جاري تحميل المراجعة...</div>`;
 
   let data;
-  try { data = await API.get(`/inventory-counts/sessions/${s.id}/review?filter=${filter}`); }
+  try {
+    const q = new URLSearchParams({ filter });
+    if (search) q.set('search', search);
+    data = await API.get(`/inventory-counts/sessions/${s.id}/review?${q.toString()}`);
+  }
   catch (e) { toast(e.message, 'danger'); return; }
   state.invCount.reviewData = data;
 
   const counted = data.counted || data.entries || [];
   const uncounted = data.uncounted || [];
   const needsReviewCount = (data.counted || []).filter(r => r.needs_review).length;
+  const zeroCount = (data.counted || []).filter(r => Number(r.counted_qty) === 0).length;
 
   const tabs = [
-    ['all', 'الكل'], ['uncounted', 'لم يُعدّ بعد'], ['counted', 'تم عدّه'], ['needs_review', 'يحتاج مراجعة'],
-  ].map(([key, label]) => `<div class="tab ${filter === key ? 'active' : ''}" onclick="icOpenReview('${key}')">${label}</div>`).join('');
+    ['all', 'الكل'], ['uncounted', 'لم يُعدّ بعد'], ['counted', 'تم عدّه'],
+    ['needs_review', 'يحتاج مراجعة'], ['zero_stock', `صفر بالمخزون${zeroCount ? ` (${zeroCount})` : ''}`],
+  ].map(([key, label]) => `<div class="tab ${filter === key ? 'active' : ''}" onclick="icOpenReview('${key}', document.getElementById('icReviewSearch')?.value || '')">${label}</div>`).join('');
 
   let rowsHtml = '';
   if (filter === 'uncounted') {
     rowsHtml = uncounted.map(p => `
       <tr><td>${p.product_name}</td><td class="mono">${p.sku}</td><td><span class="badge badge-muted">لم يُعدّ</span></td></tr>
-    `).join('') || `<tr><td colspan="3" style="text-align:center; color:var(--cream-4);">تم عدّ كل المنتجات</td></tr>`;
+    `).join('') || `<tr><td colspan="3" style="text-align:center; color:var(--cream-4);">${search ? 'لا توجد نتائج مطابقة' : 'تم عدّ كل المنتجات'}</td></tr>`;
   } else {
-    const list = filter === 'needs_review' ? counted.filter(r => r.needs_review) : counted;
+    const list = filter === 'zero_stock' ? counted.filter(r => Number(r.counted_qty) === 0)
+               : filter === 'needs_review' ? counted.filter(r => r.needs_review) : counted;
     rowsHtml = list.map(r => `
       <tr>
         <td>${r.product_name}</td>
         <td class="mono">${r.sku}</td>
         <td>${fmtN(r.system_qty_snapshot)}</td>
-        <td style="font-weight:600;">${fmtN(r.counted_qty)}</td>
+        <td style="font-weight:600;${Number(r.counted_qty)===0?'color:var(--danger);':''}">${fmtN(r.counted_qty)}</td>
         <td>
           ${r.needs_review ? '<span class="badge badge-warn">⚠ يحتاج مراجعة</span>' : '<span class="badge badge-success">✓ مطابق</span>'}
           ${r.system_qty_changed_since_count ? '<div style="font-size:0.68rem; color:var(--cream-4); margin-top:2px;">تغيّر رصيد النظام منذ العدّ</div>' : ''}
@@ -6468,7 +6993,7 @@ async function icOpenReview(filter = 'all') {
     <div class="page-header">
       <div>
         <div class="page-title">مراجعة الجرد: ${s.location_name}</div>
-        <div class="page-subtitle">${fmtN(state.invCount.progress.counted_products)} من ${fmtN(state.invCount.progress.total_products)} تم عدّه${needsReviewCount ? ` · ${fmtN(needsReviewCount)} يحتاج مراجعة` : ''}</div>
+        <div class="page-subtitle">${fmtN(state.invCount.progress.counted_products)} من ${fmtN(state.invCount.progress.total_products)} تم عدّه${needsReviewCount ? ` · ${fmtN(needsReviewCount)} يحتاج مراجعة` : ''}${zeroCount ? ` · ${fmtN(zeroCount)} صفر بالمخزون` : ''}</div>
       </div>
       <div style="display:flex; gap:var(--s-sm);">
         <button class="btn btn-subtle btn-sm" onclick="renderInventoryCountScreen()">متابعة العدّ</button>
@@ -6476,7 +7001,12 @@ async function icOpenReview(filter = 'all') {
         <button class="btn btn-primary btn-sm" onclick="icConfirmFinalize()">اعتماد الجرد نهائياً</button>
       </div>
     </div>
-    <div class="tabs" style="margin-bottom:var(--s-md);">${tabs}</div>
+    <div style="display:flex; gap:var(--s-md); align-items:center; margin-bottom:var(--s-md); flex-wrap:wrap;">
+      <div class="tabs">${tabs}</div>
+      <input type="text" class="form-control" id="icReviewSearch" placeholder="ابحث بالاسم أو الكود أو الباركود..."
+             value="${search || ''}" style="max-width:260px;"
+             onkeydown="if(event.key==='Enter'){icOpenReview('${filter}', this.value.trim());}">
+    </div>
     <div class="table-wrap"><table><thead><tr>${headCols}</tr></thead><tbody>${rowsHtml}</tbody></table></div>
   `;
 }
@@ -7045,13 +7575,72 @@ function filterInventory() {
 
 // ── Inventory Adjustment ──
 function openAdjustModal() {
-  const pSel = document.getElementById('adjProduct');
-  pSel.innerHTML = '<option value="">اختر منتجاً...</option>' + state.products.filter(p => p.is_active).map(p => `<option value="${p.id}">${p.name} (${p.sku})</option>`).join('');
+  document.getElementById('adjProduct').value = '';
+  updateAdjProdPickerLabel();
   const lSel = document.getElementById('adjLocation');
   lSel.innerHTML = '<option value="">اختر موقعاً...</option>' + state.locations.filter(l => l.is_active).map(l => `<option value="${l.id}">${l.name}</option>`).join('');
   document.getElementById('adjQty').value = '';
   document.getElementById('adjNotes').value = '';
   openModal('adjustModal');
+}
+
+// نفس منتقي المنتج بالبحث (زي الفاتورة وأمر الشراء بالظبط) — نسخة مستقلة
+// لتعديل المخزون عشان يبقى عندك نفس تجربة البحث في كل مكان بتختار فيه منتج
+function toggleAdjProdPicker() {
+  const menu = document.getElementById('adjProdPickerMenu');
+  if (!menu) return;
+  const wasOpen = menu.style.display !== 'none';
+  closeAllProdPickers();
+  closeAllLocPickers();
+  if (!wasOpen) {
+    renderAdjProdPickerMenu('');
+    menu.style.display = 'block';
+    document.getElementById('adjProdPicker')?.classList.add('open');
+    const q = document.getElementById('adjProdPickerQ');
+    if (q) { q.value = ''; setTimeout(() => q.focus(), 30); }
+  } else {
+    menu.style.display = 'none';
+  }
+}
+
+function renderAdjProdPickerMenu(query) {
+  const box = document.getElementById('adjProdPickerResults');
+  if (!box) return;
+  const all = (state.products || []).filter(p => p.is_active);
+  const qRaw = (query || '').trim();
+  let matches;
+  if (!qRaw) { matches = all.slice(0, 40); }
+  else {
+    const qLower = qRaw.toLowerCase();
+    const qNorm = _normCode(qRaw);
+    matches = all.filter(p => (p.name || '').toLowerCase().includes(qLower) || (qNorm && _normCode(p.sku).includes(qNorm))).slice(0, 40);
+  }
+  if (!matches.length) {
+    box.innerHTML = `<div class="loc-opt disabled"><span class="loc-opt-name">لا توجد نتائج مطابقة</span></div>`;
+    return;
+  }
+  const curId = parseInt(document.getElementById('adjProduct')?.value) || 0;
+  box.innerHTML = matches.map(p => `
+    <div class="loc-opt ${p.id===curId?'selected':''}" onclick="selectAdjProdPickerItem(${p.id})">
+      <span class="loc-opt-name">${p.name}</span>
+      <span class="loc-opt-avail" style="background:var(--overlay-06);color:var(--cream-4);">${p.sku||''}</span>
+    </div>`).join('');
+}
+
+function selectAdjProdPickerItem(productId) {
+  document.getElementById('adjProduct').value = productId;
+  closeAllProdPickers();
+  updateAdjProdPickerLabel();
+}
+
+function updateAdjProdPickerLabel() {
+  const btn = document.getElementById('adjProdPickerBtn');
+  const label = document.getElementById('adjProdPickerLabel');
+  if (!btn || !label) return;
+  const pid = parseInt(document.getElementById('adjProduct')?.value) || 0;
+  const p = (state.products || []).find(x => x.id === pid);
+  if (p) { btn.classList.remove('empty'); label.textContent = `${p.name} (${p.sku||''})`; }
+  else { label.textContent = 'اختر منتجاً...'; btn.classList.add('empty'); }
 }
 
 async function saveAdjustment() {
@@ -7954,6 +8543,182 @@ async function viewSupplier(id) {
     `).join('') : '<tr><td colspan="4" style="text-align:center;padding:var(--s-md);color:var(--cream-4);">لا توجد أقساط</td></tr>';
 
   } catch(err) { toast('فشل تحميل بيانات المورد', 'danger'); }
+
+  // المنتجات المرتبطة (مستقلة عن باقي البيانات عشان لو فشلت مش توقف الباقي)
+  loadSdLinkedProducts(id);
+}
+
+// ═══ ربط منتجات بالمورد — بحث حي + قائمة روابط بشارات قابلة للحذف ═══
+let _sdLinkedProducts = [];
+
+async function loadSdLinkedProducts(supplierId) {
+  try {
+    const data = await API.get(`/suppliers/${supplierId}/products`);
+    _sdLinkedProducts = data.products || [];
+    renderSdLinkedProducts();
+  } catch (err) { /* صامت — القسم مش حرج لباقي الصفحة */ }
+}
+
+function renderSdLinkedProducts() {
+  const box = document.getElementById('sdLinkedProductsList');
+  const countEl = document.getElementById('sdProductsCount');
+  if (!box) return;
+  countEl.textContent = _sdLinkedProducts.length ? `${_sdLinkedProducts.length} منتج` : '';
+  box.innerHTML = _sdLinkedProducts.length ? _sdLinkedProducts.map(p => `
+    <div class="sd-linked-chip" data-pid="${p.id}">
+      <span>${p.name}</span>
+      <span class="sku">${p.sku || ''}</span>
+      <button type="button" class="unlink-btn" title="فك الربط" onclick="unlinkSdProduct(${p.id})">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>`).join('')
+    : `<div class="text-xs text-muted" style="padding:var(--s-sm) 0;">لسه مفيش منتجات مربوطة — ابحث فوق وأضف.</div>`;
+}
+
+function renderSdProductPicker(query) {
+  const box = document.getElementById('sdProductPickerResults');
+  if (!box) return;
+  const qRaw = (query || '').trim();
+  if (!qRaw) { box.style.display = 'none'; return; }
+  const linkedIds = new Set(_sdLinkedProducts.map(p => p.id));
+  const qLower = qRaw.toLowerCase();
+  const qNorm = _normCode(qRaw);
+  const matches = (state.products || []).filter(p =>
+    p.is_active && !linkedIds.has(p.id) && (
+      (p.name || '').toLowerCase().includes(qLower) ||
+      (qNorm && _normCode(p.sku).includes(qNorm))
+    )
+  ).slice(0, 20);
+
+  if (!matches.length) {
+    box.innerHTML = `<div class="loc-opt disabled"><span class="loc-opt-name">لا توجد نتائج مطابقة</span></div>`;
+  } else {
+    box.innerHTML = matches.map(p => `
+      <div class="loc-opt" onclick="linkSdProduct(${p.id})">
+        <span class="loc-opt-name">${p.name}</span>
+        <span class="loc-opt-avail" style="background:var(--overlay-06);color:var(--cream-4);">${p.sku||''}</span>
+      </div>`).join('');
+  }
+  box.style.display = 'block';
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#sdProductSearchInput') && !e.target.closest('#sdProductPickerResults')) {
+    const box = document.getElementById('sdProductPickerResults');
+    if (box) box.style.display = 'none';
+  }
+});
+
+async function linkSdProduct(productId) {
+  if (!state.currentSupplierId) return;
+  try {
+    await API.post(`/suppliers/${state.currentSupplierId}/products`, { product_ids: [productId] });
+    const input = document.getElementById('sdProductSearchInput');
+    if (input) input.value = '';
+    document.getElementById('sdProductPickerResults').style.display = 'none';
+    await loadSdLinkedProducts(state.currentSupplierId);
+    toast('تم ربط المنتج بالمورد', 'success');
+  } catch (err) { toast('فشل ربط المنتج', 'danger'); }
+}
+
+async function unlinkSdProduct(productId) {
+  if (!state.currentSupplierId) return;
+  try {
+    await API.delete(`/suppliers/${state.currentSupplierId}/products/${productId}`);
+    await loadSdLinkedProducts(state.currentSupplierId);
+  } catch (err) { toast('فشل فك الربط', 'danger'); }
+}
+
+// ═══ ربط منتجات بالجملة (Bulk Link) ═══
+// شاشة أوسع: فلاتر (تصنيف/ترتيب/بحث) + "بدون مورد فقط" + تحديد بالجملة
+// بـ checkbox، بدل ما تضيف منتج منتج من صندوق البحث الصغير.
+let _bslSupplierId = null;
+let _bslSelected = new Set();
+
+function openBulkSupplierLinkModal(supplierId, supplierName) {
+  _bslSupplierId = supplierId;
+  _bslSelected = new Set();
+  document.getElementById('bslSupplierName').textContent = supplierName || '';
+  document.getElementById('bslSearch').value = '';
+  document.getElementById('bslUnassignedOnly').checked = false;
+  document.getElementById('bslSelectAll').checked = false;
+  document.getElementById('bslSort').value = 'name_asc';
+  // نفس فلتر التصنيفات المستخدم في صفحة المنتجات (زيادة تناسق، ومفيش داعي نطلبه تاني من السيرفر)
+  const catSel = document.getElementById('bslCategory');
+  catSel.innerHTML = '<option value="">كل التصنيفات</option>' + (state.categories || []).map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  renderBulkLinkList();
+  openModal('bulkSupplierLinkModal');
+}
+
+function renderBulkLinkList() {
+  const search = (document.getElementById('bslSearch')?.value || '').toLowerCase();
+  const catFilter = document.getElementById('bslCategory')?.value || '';
+  const unassignedOnly = document.getElementById('bslUnassignedOnly')?.checked;
+  const sortBy = document.getElementById('bslSort')?.value || 'name_asc';
+  const alreadyLinkedIds = new Set(_sdLinkedProducts.map(p => p.id));
+
+  let list = (state.products || []).filter(p => {
+    if (!p.is_active) return false;
+    if (search && !p.name.toLowerCase().includes(search) && !(p.sku || '').toLowerCase().includes(search)) return false;
+    if (catFilter && String(p.category_id) !== catFilter) return false;
+    if (unassignedOnly && (p.suppliers || []).length > 0) return false;
+    return true;
+  });
+  list.sort((a, b) => {
+    if (sortBy === 'name_asc') return a.name.localeCompare(b.name, 'ar');
+    if (sortBy === 'name_desc') return b.name.localeCompare(a.name, 'ar');
+    if (sortBy === 'price_desc') return (b.sale_price||0) - (a.sale_price||0);
+    if (sortBy === 'price_asc') return (a.sale_price||0) - (b.sale_price||0);
+    return 0;
+  });
+
+  const box = document.getElementById('bslListBox');
+  if (!list.length) {
+    box.innerHTML = `<div class="text-xs text-muted" style="padding:var(--s-lg);text-align:center;">لا توجد منتجات مطابقة</div>`;
+  } else {
+    box.innerHTML = list.map(p => {
+      const isLinkedHere = alreadyLinkedIds.has(p.id);
+      const checked = isLinkedHere || _bslSelected.has(p.id);
+      const otherSuppliers = (p.suppliers || []).filter(s => String(s.id) !== String(_bslSupplierId));
+      return `
+        <label style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:0.5px solid var(--overlay-06);cursor:${isLinkedHere?'default':'pointer'};${isLinkedHere?'opacity:.6;':''}">
+          <input type="checkbox" ${checked?'checked':''} ${isLinkedHere?'disabled':''} onchange="toggleBslProduct(${p.id}, this.checked)" style="accent-color:var(--gold-1);flex-shrink:0;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:0.85rem;color:var(--cream-0);">${p.name} <span class="mono" style="color:var(--cream-4);font-size:0.72rem;">${p.sku||''}</span></div>
+            <div style="display:flex;gap:4px;margin-top:2px;flex-wrap:wrap;">
+              ${isLinkedHere ? '<span class="supplier-tag" style="color:var(--gold-1);">✓ مرتبط بالفعل</span>' : ''}
+              ${otherSuppliers.map(s => `<span class="supplier-tag">${escHtml(s.name)}</span>`).join('')}
+            </div>
+          </div>
+          <div style="font-size:0.8rem;color:var(--cream-3);white-space:nowrap;">${(p.sale_price||0).toLocaleString('ar-EG')} ج.م</div>
+        </label>`;
+    }).join('');
+  }
+  document.getElementById('bslSelectedCount').textContent = `${_bslSelected.size} محدد`;
+}
+
+function toggleBslProduct(productId, checked) {
+  if (checked) _bslSelected.add(productId); else _bslSelected.delete(productId);
+  document.getElementById('bslSelectedCount').textContent = `${_bslSelected.size} محدد`;
+}
+
+function toggleBslSelectAll(checked) {
+  // بيحدد/يشيل تحديد كل المنتجات "الظاهرة حالياً" بس (بعد الفلترة) — مش كل المنتجات في السيستم
+  document.querySelectorAll('#bslListBox input[type="checkbox"]:not(:disabled)').forEach(cb => {
+    cb.checked = checked;
+    cb.dispatchEvent(new Event('change'));
+  });
+}
+
+async function submitBulkLink() {
+  if (!_bslSelected.size) { toast('اختر منتجاً واحداً على الأقل', 'warn'); return; }
+  try {
+    const res = await API.post(`/suppliers/${_bslSupplierId}/products`, { product_ids: [..._bslSelected] });
+    toast(res.message || 'تم الربط', 'success');
+    closeModal('bulkSupplierLinkModal');
+    await loadSdLinkedProducts(_bslSupplierId);
+    // تحديث state.products عشان الشارات تظهر فوراً من غير إعادة تحميل الصفحة كلها
+    await loadProducts();
+  } catch (err) { toast('فشل الربط: ' + err.message, 'danger'); }
 }
 
 function editCurrentSupplier() {
@@ -9789,13 +10554,13 @@ function toggleProdPicker(id) {
 
 function closeAllProdPickers() {
   document.querySelectorAll('.prod-picker-menu').forEach(m => m.style.display = 'none');
-  document.querySelectorAll('#invoiceLines .loc-picker, #poItemsList .loc-picker').forEach(p => {
-    if (p.id?.startsWith('prodPicker') || p.id?.startsWith('poProdPicker')) p.classList.remove('open');
+  document.querySelectorAll('#invoiceLines .loc-picker, #poItemsList .loc-picker, #adjProdPicker').forEach(p => {
+    if (p.id?.startsWith('prodPicker') || p.id?.startsWith('poProdPicker') || p.id === 'adjProdPicker') p.classList.remove('open');
   });
 }
 
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('[id^="prodPicker"]') && !e.target.closest('[id^="poProdPicker"]')) closeAllProdPickers();
+  if (!e.target.closest('[id^="prodPicker"]') && !e.target.closest('[id^="poProdPicker"]') && !e.target.closest('#adjProdPicker')) closeAllProdPickers();
 });
 
 function renderProdPickerMenu(id, query) {
@@ -12512,7 +13277,7 @@ function showChartUnavailable(canvasId) {
 // ألوان الرسوم، وبترجع مجموعة مختلفة حسب data-theme الحالي على <html>.
 function getCurrentTheme() {
   const t = document.documentElement.getAttribute('data-theme');
-  return (t === 'light' || t === 'colorful') ? t : 'dark';
+  return t === 'light' ? t : 'dark';
 }
 function isLightTheme() { return getCurrentTheme() === 'light'; }
 
@@ -12533,22 +13298,6 @@ function getChartColors() {
     doughnutBorder: '#ffffff',
     info: '#1a5fb4', danger: '#b3261e', warn: '#8a5a00', success: '#1f7a42',
     purple: '#7a3fa0', teal: '#3f8f8f', pink: '#b85a86', gold: '#85590a',
-  };
-  if (theme === 'colorful') return {
-    axisText: '#bdb2e8',
-    gridLine: 'rgba(255,255,255,0.08)',
-    tooltipBg: '#1c1836',
-    tooltipTitle: '#ffb347',
-    tooltipBody: '#e6e0fb',
-    tooltipBorder: 'rgba(255,122,89,0.4)',
-    legendText: '#e6e0fb',
-    barGradientTop: 'rgba(255,122,89,0.95)',
-    barGradientBottom: 'rgba(161,94,232,0.6)',
-    barBorder: '#ff7a59',
-    barHover: '#ffb347',
-    doughnutBorder: '#1c1836',
-    info: '#4d9fff', danger: '#ff4d6d', warn: '#ffb020', success: '#2ee6a6',
-    purple: '#a15ee8', teal: '#4dd6c8', pink: '#ff4d9e', gold: '#ffb347',
   };
   return {
     axisText: '#a89070',

@@ -1,0 +1,129 @@
+﻿Target Row,Target SKU,Rejected/Reassigned Image,Why Rejected,Correct Image Found?,Resolution
+121,R-U807-600-CPG-APP,image95.jpeg,"Image shows color/variant matching '800*300-GD-APP', not this row's own '600-CPG-APP'",Yes - reassigned to sibling,Moved to row 122 (R-U807-800*300-GD-APP)
+187,HT-42001-400-CPG,image153.jpeg,"Image shows color/variant matching 'BK+GD', not this row's own 'CPG'",Yes - reassigned to sibling,Moved to row 188 (HT-42001-400-BK+GD)
+229,HT-818-APP-CF,image187.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-CF'",Yes - reassigned to sibling,Moved to row 230 (HT-818-APP-BK)
+238,HT-819-APP-FGD,image189.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-FGD'",Yes - reassigned to sibling,Moved to row 239 (HT-819-APP-BK)
+252,HT-106-C10-MP3-WH-APP,image193.jpeg,"Image shows color/variant matching 'MP3-BK-APP', not this row's own 'MP3-WH-APP'",Yes - reassigned to sibling,Moved to row 254 (HT-106-C10-MP3-BK-APP)
+281,HT-145-G23-BK,image216.jpeg,"Image shows color/variant matching 'FGD', not this row's own 'BK'",Yes - reassigned to sibling,Moved to row 284 (HT-145-G23-FGD)
+287,HT-146-APP-WH,image217.jpeg,"Image shows color/variant matching 'APP-GD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 290 (HT-146-APP-GD)
+323,HT-150-G40-APP-BK,image236.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 324 (HT-150-G40-APP-FGD)
+327,HT-151-G33-APP-WH,image237.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 330 (HT-151-G33-APP-FGD)
+364,HT-170-C2-APP-FGD,image152.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-FGD'",Yes - reassigned to sibling,Moved to row 366 (HT-170-C2-APP-BK)
+368,HT-171-C2-APP-WH,image145.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 370 (HT-171-C2-APP-FGD)
+371,HT-802-APP-BK,image262.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 372 (HT-802-APP-FGD)
+376,HT-803-APP-WH,image263.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 377 (HT-803-APP-BK)
+378,HT-804-APP-WH,image169.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 381 (HT-804-APP-FGD)
+382,HT-805-APP-BK,image264.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 384 (HT-805-APP-FGD)
+387,HT-806-APP-BK,image12.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 388 (HT-806-APP-FGD)
+393,HT-807-APP-WH,image265.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 396 (HT-807-APP-BK)
+421,HT-816-APP-BK,image97.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 422 (HT-816-APP-FGD)
+428,HT-820-APP-WH,image100.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 429 (HT-820-APP-BK)
+430,HT-821-APP-WH,image273.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 432 (HT-821-APP-BK)
+434,HT-823-APP-FGD,image274.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-FGD'",Yes - reassigned to sibling,Moved to row 435 (HT-823-APP-BK)
+446,HT-828-APP-BK,image62.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 448 (HT-828-APP-FGD)
+451,HT-830-APP-WH,image60.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 452 (HT-830-APP-FGD)
+458,HT-834-APP-WH,image279.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 460 (HT-834-APP-FGD)
+474,HT-840-APP-BK,image287.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 476 (HT-840-APP-FGD)
+478,HT-841-APP-WH,image113.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 480 (HT-841-APP-FGD)
+483,HT-843-APP-BK,image290.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 484 (HT-843-APP-FGD)
+489,HT-845-APP-BK,image178.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 490 (HT-845-APP-FGD)
+492,HT-846-APP-WH,image294.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 494 (HT-846-APP-FGD)
+497,HT-848-G33-BK,image55.jpeg,"Image shows color/variant matching 'FGD', not this row's own 'BK'",Yes - reassigned to sibling,Moved to row 500 (HT-848-G33-FGD)
+504,HT-849-G33-APP-FGD,image123.jpeg,"Image shows color/variant matching 'APP-BK', not this row's own 'APP-FGD'",Yes - reassigned to sibling,Moved to row 505 (HT-849-G33-APP-BK)
+509,HT-850-G33-BK,image154.jpeg,"Image shows color/variant matching 'FGD', not this row's own 'BK'",Yes - reassigned to sibling,Moved to row 511 (HT-850-G33-FGD)
+513,HT-850-BK,image296.jpeg,"Image shows color/variant matching 'FGD', not this row's own 'BK'",Yes - reassigned to sibling,Moved to row 515 (HT-850-FGD)
+521,HT-853-APP-BK,image299.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 522 (HT-853-APP-FGD)
+537,HT-867-BK,image303.jpeg,"Image shows color/variant matching 'FGD', not this row's own 'BK'",Yes - reassigned to sibling,Moved to row 539 (HT-867-FGD)
+543,HT-869-BK,image308.jpeg,"Image shows color/variant matching 'FGD', not this row's own 'BK'",Yes - reassigned to sibling,Moved to row 545 (HT-869-FGD)
+578,HT-881-APP-BK,image129.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 579 (HT-881-APP-FGD)
+583,HT-885-APP-WH,image335.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 584 (HT-885-APP-FGD)
+587,HT-886-APP-WH,image337.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-WH'",Yes - reassigned to sibling,Moved to row 588 (HT-886-APP-FGD)
+604,HT-893-DZ-22-APP-BK,image341.jpeg,"Image shows color/variant matching 'DZ-22-APP-FGD', not this row's own 'DZ-22-APP-BK'",Yes - reassigned to sibling,Moved to row 605 (HT-893-DZ-22-APP-FGD)
+611,HT-898-A-APP-FGD,image350.jpeg,"Image shows color/variant matching 'T42-APP-BK', not this row's own 'A-APP-FGD'",Yes - reassigned to sibling,Moved to row 612 (HT-898-T42-APP-BK)
+613,HT-900-APP-T40-BK,image352.jpeg,"Image shows color/variant matching 'APP-T40-FGD', not this row's own 'APP-T40-BK'",Yes - reassigned to sibling,Moved to row 614 (HT-900-APP-T40-FGD)
+615,HT-901-APP-T30-BK,image354.jpeg,"Image shows color/variant matching 'APP-T30-FGD', not this row's own 'APP-T30-BK'",Yes - reassigned to sibling,Moved to row 616 (HT-901-APP-T30-FGD)
+620,HT-904-Z-004-APP-BK,image357.jpeg,"Image shows color/variant matching 'Z-004-APP-FGD', not this row's own 'Z-004-APP-BK'",Yes - reassigned to sibling,Moved to row 621 (HT-904-Z-004-APP-FGD)
+622,HT-905-T-34-APP-BK,image358.jpeg,"Image shows color/variant matching 'T-34-APP-FGD', not this row's own 'T-34-APP-BK'",Yes - reassigned to sibling,Moved to row 623 (HT-905-T-34-APP-FGD)
+628,HT-906-Z-005-APP-BK,image363.jpeg,"Image shows color/variant matching 'Z-005-APP-FGD', not this row's own 'Z-005-APP-BK'",Yes - reassigned to sibling,Moved to row 629 (HT-906-Z-005-APP-FGD)
+646,HT-909-Z-005-APP-BK,image369.jpeg,"Image shows color/variant matching 'Z-005-APP-FGD', not this row's own 'Z-005-APP-BK'",Yes - reassigned to sibling,Moved to row 647 (HT-909-Z-005-APP-FGD)
+657,HT-915-G18-A-APP-BK,image56.jpeg,"Image shows color/variant matching 'G18-Z034-APP-FGD', not this row's own 'G18-(A)-APP-BK'",Yes - reassigned to sibling,Moved to row 658 (HT-915-G18-Z034-APP-FGD)
+659,HT-915-G23-A-APP-FGD,image373.jpeg,"Image shows color/variant matching 'G23-(A)-APP-BK', not this row's own 'G23-(A)-APP-FGD'",Yes - reassigned to sibling,Moved to row 660 (HT-915-G23-A-APP-BK)
+682,HT-925-APP-BK,image377.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 684 (HT-925-APP-FGD)
+738,HT-960-APP-BK,image106.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 740 (HT-960-APP-FGD)
+741,HT-963-APP-FGD,image254.jpeg,"Image shows color/variant matching 'APP-CPG', not this row's own 'APP-FGD'",Yes - reassigned to sibling,Moved to row 742 (HT-963-APP-CPG)
+755,HT-980-APP-BK,image85.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 757 (HT-980-APP-FGD)
+780,HT-1003-APP-BK,image406.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 781 (HT-1003-APP-FGD)
+783,HT-1005-Z057-APP-BK,image408.jpeg,"Image shows color/variant matching 'Z057-APP-FGD', not this row's own 'Z057-APP-BK'",Yes - reassigned to sibling,Moved to row 784 (HT-1005-Z057-APP-FGD)
+791,HT-1010-Z029-APP-BK,image415.jpeg,"Image shows color/variant matching 'Z029-APP-FGD', not this row's own 'Z029-APP-BK'",Yes - reassigned to sibling,Moved to row 792 (HT-1010-Z029-APP-FGD)
+795,HT-1012-Z029-APP-BK,image417.jpeg,"Image shows color/variant matching 'Z029-APP-FGD', not this row's own 'Z029-APP-BK'",Yes - reassigned to sibling,Moved to row 796 (HT-1012-Z029-APP-FGD)
+797,HT-1013-Z036-APP-BK,image418.jpeg,"Image shows color/variant matching 'Z036-APP-FGD', not this row's own 'Z036-APP-BK'",Yes - reassigned to sibling,Moved to row 798 (HT-1013-Z036-APP-FGD)
+802,HT-1016-APP-BK,image421.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 803 (HT-1016-APP-FGD)
+809,HT-1027-A-APP-BK,image307.jpeg,"Image shows color/variant matching 'A-APP-FGD', not this row's own 'A-APP-BK'",Yes - reassigned to sibling,Moved to row 810 (HT-1027-A-APP-FGD)
+929,RL-666-A-APP-BK,image351.jpeg,"Image shows color/variant matching '(A)-APP-FGD', not this row's own '(A)-APP-BK'",Yes - reassigned to sibling,Moved to row 930 (RL-666-A-APP-FGD)
+971,RL-729-B-APP-BK,image146.jpeg,"Image shows color/variant matching 'APP-FGD', not this row's own 'APP-BK'",Yes - reassigned to sibling,Moved to row 972 (RL-729-B-APP-FGD)
+1042,R-HTB202-FGD,image404.jpeg,"Image shows color/variant matching 'BK', not this row's own 'FGD'",Yes - reassigned to sibling,Moved to row 1043 (R-HTB202-BK)
+1053,R-HTB209-BK,image191.jpeg,"Image shows color/variant matching 'FGD', not this row's own 'BK'",Yes - reassigned to sibling,Moved to row 1055 (R-HTB209-FGD)
+1062,R-HTB211-FGD,image515.jpeg,"Image shows color/variant matching 'BK', not this row's own 'FGD'",Yes - reassigned to sibling,Moved to row 1063 (R-HTB211-BK)
+1065,R-HTB213-BK,image328.jpeg,"Image shows color/variant matching 'FGD', not this row's own 'BK'",Yes - reassigned to sibling,Moved to row 1066 (R-HTB213-FGD)
+59,X18113-450GD-APP,image6.jpeg,Image/descr ('R-X-18116-450-APP-CH') color conflicts with row's own variant ('450GD-APP'),No,"Left imageless, flagged for manual review (Group C)"
+60,X18116-450GD-APP,image6.jpeg,Image/descr ('R-X-18116-450-APP-CH') color conflicts with row's own variant ('450GD-APP'),No,"Left imageless, flagged for manual review (Group C)"
+61,X18123-450GD-APP,image6.jpeg,Image/descr ('R-X-18116-450-APP-CH') color conflicts with row's own variant ('450GD-APP'),No,"Left imageless, flagged for manual review (Group C)"
+62,X18124-450GD-APP,image6.jpeg,Image/descr ('R-X-18116-450-APP-CH') color conflicts with row's own variant ('450GD-APP'),No,"Left imageless, flagged for manual review (Group C)"
+63,X18126-450GD-APP,image6.jpeg,Image/descr ('R-X-18116-450-APP-CH') color conflicts with row's own variant ('450GD-APP'),No,"Left imageless, flagged for manual review (Group C)"
+64,X18127-450GD-APP,image6.jpeg,Image/descr ('R-X-18116-450-APP-CH') color conflicts with row's own variant ('450GD-APP'),No,"Left imageless, flagged for manual review (Group C)"
+65,X18130-450GD-APP,image6.jpeg,Image/descr ('R-X-18116-450-APP-CH') color conflicts with row's own variant ('450GD-APP'),No,"Left imageless, flagged for manual review (Group C)"
+140,R-U821-450-CRD-APP,image27.jpeg,Image/descr ('R-U-821-450-APP-GD') color conflicts with row's own variant ('450-CRD-APP'),No,"Left imageless, flagged for manual review (Group C)"
+168,R-U854-450-RG-APP,image131.jpeg,Image/descr ('R-U-854-450-APP-GD') color conflicts with row's own variant ('450-RG-APP'),No,"Left imageless, flagged for manual review (Group C)"
+338,HT-155-DZ-007-FGD,image174.jpeg,Image/descr ('R-HT-155-Z-003-BK') color conflicts with row's own variant ('DZ-(007)-FGD'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+339,HT-155-DZ-16-FGD,image241.jpeg,Image/descr ('R-HT-155-DZ-16-APP-BK') color conflicts with row's own variant ('DZ-(16)-FGD'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+532,HT-864-DZ-7APP-BK,image301.jpeg,Image/descr ('R-HT-864-APP-DZ-7-FGD') color conflicts with row's own variant ('(DZ-7)APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+534,HT-865-DZ-4APP-WH,image302.jpeg,Image/descr ('R-HT-865-APP-DZ-4-FGD') color conflicts with row's own variant ('(DZ-4)APP-WH'),No,"Left imageless, flagged for manual review (Group C)"
+536,HT-866-DZ-10APP-BK,image198.jpeg,Image/descr ('R-HT-866-APP-DZ10-FGD') color conflicts with row's own variant ('(DZ-10)APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+541,HT-868-WH,image304.jpeg,Image/descr ('R-HT-868-FGD') color conflicts with row's own variant ('WH'),No,"Left imageless, flagged for manual review (Group C)"
+566,HT-876-Z038APP-WH,image319.jpeg,Image/descr ('R-HT-876-APP-BK') color conflicts with row's own variant ('(Z038)APP-WH'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+594,HT-888-APP-FGD,image325.jpeg,Image/descr ('R-HT-888-APP-WH') color conflicts with row's own variant ('APP-FGD'),No,"Left imageless, flagged for manual review (Group C)"
+632,HT-907-Z-003-APP-BK,image366.jpeg,Image/descr ('R-HT-907-Z-003-APP-FGD') color conflicts with row's own variant ('Z-003-APP-BK'),"Ambiguous - 3 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+640,HT-908-Z-002-APP-BK,image367.jpeg,Image/descr ('R-HT-908-Z-002-APP-FGD') color conflicts with row's own variant ('Z-002-APP-BK'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+643,HT-908-Z-040-APP-BK,image158.jpeg,Image/descr ('R-HT908-Z040-APP-FGD') color conflicts with row's own variant ('Z-040-APP-BK'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+645,HT-908-Z-042-APP-FGD,image368.jpeg,Image/descr ('R-HT908-Z042-APP-BK') color conflicts with row's own variant ('Z-042-APP-FGD'),No,"Left imageless, flagged for manual review (Group C)"
+653,HT-912-G20-APP-BK,image229.jpeg,Image/descr ('R-HT-912-G23-APP-BK') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+655,HT-913-G35-APP-BK,image282.jpeg,Image/descr ('R-HT-913-G33-APP-FGD') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+665,HT-918-G23-A-APP-BK,image192.jpeg,Image/descr ('R-HT-918-G23-APP-FGD') color conflicts with row's own variant ('(A)-APP-BK'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+669,HT-920-C29-BK,image208.jpeg,Image/descr ('R-HT-920-C29-APP-CH') color conflicts with row's own variant ('BK'),No,"Left imageless, flagged for manual review (Group C)"
+686,HT-927-APP-Z028-FGD,image183.jpeg,Image/descr ('R-HT-927-Z-028-APP-BK') color conflicts with row's own variant ('APP-Z028-FGD'),"Ambiguous - 3 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+693,HT-928-APP-Z047-WH,image295.jpeg,Image/descr ('R-HT-928-APP-FGD') color conflicts with row's own variant ('APP-Z047-WH'),No,"Left imageless, flagged for manual review (Group C)"
+703,HT-936-G40-APP-WH,image383.jpeg,Image/descr ('R-HT-936-G-40-APP-FGD') color conflicts with row's own variant ('G40-APP-WH'),No,"Left imageless, flagged for manual review (Group C)"
+709,HT-941-G23-ET008-APP-FGD,image386.jpeg,Image/descr ('R-HT-941-Z-015-APP-BK') color conflicts with row's own variant ('ET008-APP-FGD'),No,"Left imageless, flagged for manual review (Group C)"
+716,HT-946-APP-BK,image374.jpeg,Image/descr ('R-HT-946-APP-FGD') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+734,HT-956-APP-CPG,image391.jpeg,Image/descr ('R-HT-956-APP-CH') color conflicts with row's own variant ('APP-CPG'),No,"Left imageless, flagged for manual review (Group C)"
+736,HT-957-APP-CPG,image102.jpeg,Image/descr ('R-HT-957-APP-FGD') color conflicts with row's own variant ('APP-CPG'),No,"Left imageless, flagged for manual review (Group C)"
+737,HT-959-APP-CPG,image392.jpeg,Image/descr ('R-HT-959-APP-CH') color conflicts with row's own variant ('APP-CPG'),No,"Left imageless, flagged for manual review (Group C)"
+744,HT-965-APP-BK,image359.jpeg,Image/descr ('R-HT-965-APP-FGD') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+745,HT-966-APP-BK,image393.jpeg,Image/descr ('R-HT-966-APP-FGD') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+746,HT-968-APP-CPG,image394.jpeg,Image/descr ('R-HT-968-APP-CH') color conflicts with row's own variant ('APP-CPG'),No,"Left imageless, flagged for manual review (Group C)"
+748,HT-969-APP-CPG,image395.jpeg,Image/descr ('R-HT-969-APP-FGD') color conflicts with row's own variant ('APP-CPG'),No,"Left imageless, flagged for manual review (Group C)"
+751,HT-972-A-APP-BK,image30.jpeg,Image/descr ('R-HT-972-APP-CH') color conflicts with row's own variant ('A-APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+765,HT-984-APP-XZ012-CPG,image244.jpeg,Image/descr ('R-HT-984-XZ-012-APP-CH') color conflicts with row's own variant ('APP-XZ012-CPG'),No,"Left imageless, flagged for manual review (Group C)"
+768,HT-985-APP-BK,image399.jpeg,Image/descr ('R-HT-985-APP-CH') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+769,HT-988-EZ042-APP-BK,image400.jpeg,Image/descr ('R-HT-988-EZ-042-APP-CH') color conflicts with row's own variant ('EZ042-APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+770,HT-988-C29-EZ037-APP-BK,image401.jpeg,Image/descr ('HT988-EZ-037-FGD') color conflicts with row's own variant ('C29-EZ037-APP-BK'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+782,HT-1004-APP-BK,image266.jpeg,Image/descr ('R-HT1004-APP-FGD') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+785,HT-1006-Z041-APP-BK,image409.jpeg,Image/descr ('R-HT1006-Z041-APP-FGD') color conflicts with row's own variant ('Z041-APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+799,HT-1014-Z036-APP-BK,image419.jpeg,Image/descr ('R-HT1014-Z036-APP-FGD') color conflicts with row's own variant ('Z036-APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+814,HT-1038-Z042-APP-BK,image429.jpeg,Image/descr ('R-HT1038-Z042-APP-CPG') color conflicts with row's own variant ('Z042-APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+881,RL-636-G16-APP-BK,image347.jpeg,Image/descr ('RL-636-APP-G-23-APP-FGD') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+901,RL-649-APP-WH,image456.jpeg,Image/descr ('R-RL-649-APP-FGD') color conflicts with row's own variant ('APP-WH'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+910,RL-653-APP-WH,image460.jpeg,Image/descr ('R-RL-653-A-APP-FGD') color conflicts with row's own variant ('APP-WH'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+932,RL-666-G23-A-APP-GR,image353.jpeg,Image/descr ('R-RL666-G23-A-APP-FGD') color conflicts with row's own variant ('(A)-APP-GR'),"Ambiguous - 2 possible candidates, none conclusive","Left imageless, flagged for manual review (Group C)"
+948,RL-685-APP-BK,image472.jpeg,Image/descr ('R-RL-685-APP-CPG') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+950,RL-692-APP-BK,image473.jpeg,Image/descr ('R-RL-692-APP-FGD') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+951,RL-693-A-APP-BK,image342.jpeg,Image/descr ('R-RL-693-APP-FGD') color conflicts with row's own variant ('(A)-APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+952,RL-694-APP-BK,image474.jpeg,Image/descr ('R-RL-694-APP-FGD') color conflicts with row's own variant ('APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+956,RL-702-Z057-APP-BK,image475.jpeg,Image/descr ('R-RL-702-EZ-003-APP-WH') color conflicts with row's own variant ('Z057-APP-BK'),No,"Left imageless, flagged for manual review (Group C)"
+1076,R-HTB223-BK,image248.jpeg,Image/descr ('R-HTB-223-FGD') color conflicts with row's own variant ('BK'),No,"Left imageless, flagged for manual review (Group C)"
+3,Q-049-APP-400-GD,image2.jpeg,Family representative shows R-Q049-500-APP-FGD; no existing row matches that exact size+color,No matching variant exists in current inventory,
+10,R-QS-201-400-GD/S,image0.jpeg,Photo shows R-QS-201-600/S-GD; misattached to row10 (400-GD/S),Yes - correct home is row 12 (600-GD/S),
+121,R-U807-600-CPG-APP,image95.jpeg,Photo shows 800X300-GD; row121 is 600-CPG-APP,No - correct CPG photo not found anywhere in dataset,
+148,R-U832-450-GD-APP,image114.jpeg,Different photo template/brand entirely; unclear if same manufacturer/product line as row178,No,
+338,HT-155-DZ-007-FGD,image174.jpeg,"Image is an exact duplicate of row 336's photo (Z-003-BK), not this row's own Z-007-FGD",No - true Z-007-FGD photo not found,
+382,HT-805-APP-BK,image264.jpeg,Row says APP-BK but image shows APP-FGD; reassigned via swap to row 384,Yes - see swap table,

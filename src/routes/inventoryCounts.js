@@ -129,13 +129,20 @@ router.get('/sessions/:id', async (req, res) => {
 // (upsert — لو المنتج اتعدّ قبل كده في نفس الجلسة، بيتحدّث نفس الصف؛
 // مفيش صف مكرر أبداً بفضل UNIQUE(session_id, product_id))
 router.post('/sessions/:id/entries', async (req, res) => {
-  const { product_id, counted_qty } = req.body;
+  const { product_id, counted_qty, sale_price } = req.body;
   if (!product_id || counted_qty === undefined || counted_qty === null || counted_qty === '')
     return res.status(400).json({ error: 'يرجى تحديد المنتج والكمية المعدودة' });
 
   const qty = parseFloat(counted_qty);
   if (isNaN(qty) || qty < 0)
     return res.status(400).json({ error: 'الكمية يجب أن تكون رقماً أكبر من أو يساوي صفر' });
+
+  let newSalePrice = null;
+  if (sale_price !== undefined && sale_price !== null && sale_price !== '') {
+    newSalePrice = parseFloat(sale_price);
+    if (isNaN(newSalePrice) || newSalePrice < 0)
+      return res.status(400).json({ error: 'سعر البيع يجب أن يكون رقماً أكبر من أو يساوي صفر' });
+  }
 
   const session = await get(`SELECT * FROM inventory_count_sessions WHERE id = ?`, [req.params.id]);
   if (!session) return res.status(404).json({ error: 'الجلسة غير موجودة' });
@@ -172,6 +179,16 @@ router.post('/sessions/:id/entries', async (req, res) => {
     );
   }
 
+  // تحديث سعر البيع وقت الجرد — اختياري، ومباشر على المنتج فوراً (مش لازم
+  // انتظار اعتماد الجرد، لأن السعر مش جزء من عملية "تسوية المخزون" الذرّية،
+  // فمفيش داعي يتأخر لحد الاعتماد النهائي)
+  if (newSalePrice !== null && newSalePrice !== product.sale_price) {
+    await run(`UPDATE products SET sale_price = ?, updated_at = datetime('now') WHERE id = ?`, [newSalePrice, product_id]);
+    await logAction(req.user.id, 'update_sale_price_during_count', 'product', product_id, {
+      session_id: req.params.id, old_price: product.sale_price, new_price: newSalePrice,
+    });
+  }
+
   await run(`UPDATE inventory_count_sessions SET updated_at = datetime('now') WHERE id = ?`, [req.params.id]);
 
   res.json({
@@ -181,18 +198,27 @@ router.post('/sessions/:id/entries', async (req, res) => {
 });
 
 // GET /api/inventory-counts/sessions/:id/review — مراجعة الجرد بفلاتر
-// filter: all | uncounted | counted | needs_review
+// filter: all | uncounted | counted | needs_review | zero_stock
+// search: بحث بالاسم أو الكود أو الباركود (اختياري، فوق أي فلتر آخر)
 router.get('/sessions/:id/review', async (req, res) => {
   const session = await get(`SELECT * FROM inventory_count_sessions WHERE id = ?`, [req.params.id]);
   if (!session) return res.status(404).json({ error: 'الجلسة غير موجودة' });
   await assertLocationAllowed(req.user, session.location_id);
 
   const filter = req.query.filter || 'all';
+  const search = (req.query.search || '').trim();
+  function matchesSearch(row) {
+    if (!search) return true;
+    const q = search.toLowerCase();
+    return (row.product_name || '').toLowerCase().includes(q) ||
+           (row.sku || '').toLowerCase().includes(q) ||
+           (row.barcode || '').includes(search);
+  }
 
   // منتجات معدودة بالفعل في الجلسة دي — مع الرصيد الحيّ الحالي (لمقارنته
   // بالـ snapshot وقت العدّ، ولتحديد "هل النظام اتغيّر من وقت العدّ؟")
   const counted = await all(`
-    SELECT e.*, p.name as product_name, p.sku, p.barcode, p.unit, p.image_path,
+    SELECT e.*, p.name as product_name, p.sku, p.barcode, p.unit, p.image_path, p.sale_price,
            i.quantity as current_system_qty
     FROM inventory_count_entries e
     JOIN products p ON p.id = e.product_id
@@ -201,7 +227,7 @@ router.get('/sessions/:id/review', async (req, res) => {
     ORDER BY e.updated_at DESC
   `, [session.location_id, req.params.id]);
 
-  const enriched = counted.map(row => {
+  const enriched = counted.filter(matchesSearch).map(row => {
     const currentQty = row.current_system_qty ?? 0;
     return {
       ...row,
@@ -215,28 +241,28 @@ router.get('/sessions/:id/review', async (req, res) => {
   if (filter === 'needs_review') {
     return res.json({ entries: enriched.filter(r => r.needs_review), filter });
   }
+  if (filter === 'zero_stock') {
+    // "لسه صفر" — بمعنى إنه اتعدّ فعلاً وطلع صفر (مش "لسه محدّش عدّه")
+    return res.json({ entries: enriched.filter(r => Number(r.counted_qty) === 0), filter });
+  }
   if (filter === 'counted') {
     return res.json({ entries: enriched, filter });
   }
-  if (filter === 'uncounted') {
-    const uncounted = await all(`
-      SELECT p.id as product_id, p.name as product_name, p.sku, p.barcode, p.unit, p.image_path
-      FROM products p
-      WHERE p.is_active = 1
-        AND p.id NOT IN (SELECT product_id FROM inventory_count_entries WHERE session_id = ?)
-      ORDER BY p.name ASC
-    `, [req.params.id]);
-    return res.json({ entries: uncounted, filter });
-  }
 
-  // all: نرجّع الاتنين مع بعض
-  const uncounted = await all(`
-    SELECT p.id as product_id, p.name as product_name, p.sku, p.barcode, p.unit, p.image_path
+  const uncountedSql = `
+    SELECT p.id as product_id, p.name as product_name, p.sku, p.barcode, p.unit, p.image_path, p.sale_price
     FROM products p
     WHERE p.is_active = 1
       AND p.id NOT IN (SELECT product_id FROM inventory_count_entries WHERE session_id = ?)
     ORDER BY p.name ASC
-  `, [req.params.id]);
+  `;
+  if (filter === 'uncounted') {
+    const uncounted = (await all(uncountedSql, [req.params.id])).filter(matchesSearch);
+    return res.json({ entries: uncounted, filter });
+  }
+
+  // all: نرجّع الاتنين مع بعض
+  const uncounted = (await all(uncountedSql, [req.params.id])).filter(matchesSearch);
   res.json({ counted: enriched, uncounted, filter });
 });
 
@@ -254,7 +280,7 @@ router.post('/sessions/:id/finalize', async (req, res) => {
 
   const entries = await all(`
     SELECT e.session_id, e.product_id, e.system_qty_snapshot, e.counted_qty,
-           p.allow_fractional_qty
+           p.allow_fractional_qty, p.name as product_name, p.sku
     FROM inventory_count_entries e
     JOIN products p ON p.id = e.product_id
     WHERE e.session_id = ?
@@ -285,7 +311,7 @@ router.post('/sessions/:id/finalize', async (req, res) => {
         user_id: req.user.id,
         reference_type: 'inventory_count',
       });
-      applied.push({ product_id: entry.product_id, ...result });
+      applied.push({ product_id: entry.product_id, product_name: entry.product_name, sku: entry.sku, ...result });
     }
 
     await run(
@@ -299,9 +325,11 @@ router.post('/sessions/:id/finalize', async (req, res) => {
   await logAction(req.user.id, 'finalize_inventory_count', 'inventory_count_session', session.id, {
     location_id: session.location_id, entries_counted: entries.length, adjustments_made: adjustments.length,
   });
+  const location = await get(`SELECT name FROM locations WHERE id = ?`, [session.location_id]);
   eventBus.emit('inventory.count_finalized', {
-    session_id: session.id, location_id: session.location_id,
-    entries_counted: entries.length, adjustments_made: adjustments.length, actorName: req.user.full_name,
+    session_id: session.id, location_id: session.location_id, location_name: location?.name,
+    entries_counted: entries.length, adjustments_made: adjustments.length, adjustments,
+    actorName: req.user.full_name,
   });
 
   res.json({

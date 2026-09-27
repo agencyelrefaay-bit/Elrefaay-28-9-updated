@@ -401,6 +401,47 @@ router.post('/import', authorize('admin','manager'), upload.single('file'), asyn
 //    لو رصيد المورد صفر (لا توجد مبالغ مستحقة في أي الاتجاهين) ولا توجد أي
 //    أوامر شراء لسه مفتوحة (draft/sent/partial) — وإلا هنفقد تتبع الالتزام
 //    المالي القائم مع المورد ده. ──
+// ═══ ربط المنتجات بالمورد ═══
+// استخدام داخلي بحت (لموظفي السيستم) لتصنيف "المنتج ده بييجي من مين" —
+// بيساعد في الفلترة والبحث، ومالوش أي ظهور في الفاتورة أو أي مستند للعميل.
+
+// GET /api/suppliers/:id/products — المنتجات المرتبطة بالمورد
+router.get('/:id/products', async (req, res) => {
+  const rows = await all(`
+    SELECT p.id, p.name, p.sku, p.barcode, p.is_active, c.name as category_name, sp.created_at as linked_at
+    FROM supplier_products sp
+    JOIN products p ON p.id = sp.product_id
+    LEFT JOIN categories c ON c.id = p.category_id
+    WHERE sp.supplier_id = ?
+    ORDER BY sp.created_at DESC`, [req.params.id]);
+  res.json({ products: rows });
+});
+
+// POST /api/suppliers/:id/products — ربط منتج أو أكتر بالمورد { product_ids: [1,2,3] }
+router.post('/:id/products', authorize('admin','manager','warehouse'), async (req, res) => {
+  const supplier = await get(`SELECT id FROM suppliers WHERE id=?`, [req.params.id]);
+  if (!supplier) return res.status(404).json({ error: 'المورد غير موجود' });
+  const ids = Array.isArray(req.body.product_ids) ? req.body.product_ids.map(Number).filter(Boolean) : [];
+  if (!ids.length) return res.status(400).json({ error: 'اختر منتجاً واحداً على الأقل' });
+  let linked = 0;
+  for (const pid of ids) {
+    try {
+      await run(`INSERT INTO supplier_products (supplier_id, product_id, created_by) VALUES (?,?,?)
+                  ON CONFLICT (supplier_id, product_id) DO NOTHING`, [req.params.id, pid, req.user.id]);
+      linked++;
+    } catch (e) { /* منتج غير موجود أو مربوط بالفعل — نتجاهل ونكمل الباقي */ }
+  }
+  await logAction(req.user.id, 'link_products', 'supplier', req.params.id, { product_ids: ids });
+  res.json({ message: `تم ربط ${linked} منتج بالمورد`, linked });
+});
+
+// DELETE /api/suppliers/:id/products/:productId — فك الربط
+router.delete('/:id/products/:productId', authorize('admin','manager','warehouse'), async (req, res) => {
+  await run(`DELETE FROM supplier_products WHERE supplier_id=? AND product_id=?`, [req.params.id, req.params.productId]);
+  await logAction(req.user.id, 'unlink_product', 'supplier', req.params.id, { product_id: req.params.productId });
+  res.json({ message: 'تم فك الربط' });
+});
+
 router.delete('/:id', authorize('admin'), async (req, res) => {
   const { id } = req.params;
   const s = await get(`SELECT * FROM suppliers WHERE id=?`,[id]);

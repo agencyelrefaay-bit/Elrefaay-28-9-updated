@@ -219,10 +219,35 @@ function salesReturnMessage({ ret, eventType, actorName }) {
   return msg;
 }
 
+// ═══ اعتماد جرد مخزون ═══
+function inventoryCountFinalizedMessage({ session_id, location_name, entries_counted, adjustments_made, adjustments, actorName }) {
+  let msg = `📋 <b>تم اعتماد جرد مخزون</b>\n${SEP}\n`;
+  msg += `🏬 <b>المخزن:</b> ${location_name || '—'}\n🔢 <b>جلسة رقم:</b> #${session_id}\n`;
+  if (actorName) msg += `👨‍💼 <b>بواسطة:</b> ${actorName}\n`;
+  msg += `${SEP}\n📦 <b>منتجات معدودة:</b> ${entries_counted}\n🔧 <b>تعديلات فعلية:</b> ${adjustments_made}\n`;
+  if (adjustments?.length) {
+    const increases = adjustments.filter(a => a.newQty > a.qtyBefore);
+    const decreases = adjustments.filter(a => a.newQty < a.qtyBefore);
+    if (increases.length) {
+      msg += `${SEP}\n📈 <b>زيادة (${increases.length}):</b>\n` +
+        increases.slice(0, 15).map(a => `  • ${a.product_name} — ${fmt(a.qtyBefore)} ← <b>${fmt(a.newQty)}</b>`).join('\n') + '\n';
+      if (increases.length > 15) msg += `  ...و${increases.length - 15} منتج آخر\n`;
+    }
+    if (decreases.length) {
+      msg += `${SEP}\n📉 <b>نقص (${decreases.length}):</b>\n` +
+        decreases.slice(0, 15).map(a => `  • ${a.product_name} — ${fmt(a.qtyBefore)} ← <b>${fmt(a.newQty)}</b>`).join('\n') + '\n';
+      if (decreases.length > 15) msg += `  ...و${decreases.length - 15} منتج آخر\n`;
+    }
+  } else {
+    msg += `${SEP}\n✅ الجرد مطابق تماماً للنظام — لا توجد أي فروقات\n`;
+  }
+  return msg;
+}
+
 module.exports = {
   invoiceMessage, customerPaymentMessage, supplierPaymentMessage,
   productMessage, lowStockMessage, poMessage, goodsReceiptMessage,
   installmentReminderMessage, settingsChangedMessage,
   inventoryAdjustedMessage, stockTransferMessage,
-  salesReturnMessage,
+  salesReturnMessage, inventoryCountFinalizedMessage,
 };

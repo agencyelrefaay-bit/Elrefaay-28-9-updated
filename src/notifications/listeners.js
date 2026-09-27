@@ -72,6 +72,11 @@ safeOn('stock.transferred', async (p) => {
   await notifier.sendText(messages.stockTransferMessage(p));
 });
 
+// ═══ جرد المخزون ═══
+safeOn('inventory.count_finalized', async (p) => {
+  await notifier.sendText(messages.inventoryCountFinalizedMessage(p));
+});
+
 // ═══ مرتجعات المبيعات ═══
 safeOn('sales_return.created', async (p) => {
   await notifier.sendText(messages.salesReturnMessage({ ...p, eventType: 'created' }));

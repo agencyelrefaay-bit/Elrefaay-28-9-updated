@@ -121,6 +121,25 @@ async function attachStockSummary(products, req) {
 }
 
 
+// وسم كل منتج بأسماء الموردين المرتبطين بيه (لو موجودين) — استخدام داخلي
+// بحت لعرض شارة صغيرة "من فتوح" مثلاً في شاشات السيستم، ومالهاش أي وجود
+// في الفاتورة أو أي مستند بيشوفه العميل. Query واحدة فقط زي attachStockSummary.
+async function attachSupplierTags(products) {
+  if (!products.length) return products;
+  const productIds = products.map((p) => p.id);
+  const placeholders = productIds.map(() => '?').join(',');
+  const rows = await all(
+    `SELECT sp.product_id, s.id as supplier_id, s.name as supplier_name
+     FROM supplier_products sp JOIN suppliers s ON s.id = sp.supplier_id
+     WHERE sp.product_id IN (${placeholders})`, productIds);
+  const map = new Map();
+  rows.forEach((r) => {
+    if (!map.has(r.product_id)) map.set(r.product_id, []);
+    map.get(r.product_id).push({ id: r.supplier_id, name: r.supplier_name });
+  });
+  return products.map((p) => ({ ...p, suppliers: map.get(p.id) || [] }));
+}
+
 // يشيل أي حرف مش عربي/إنجليزي/رقم من الكود عشان "GFH-040-8-GD" و"GFH 040 8 GD"
 // و"gfh0408gd" يتطابقوا مع بعض وقت البحث، بغض النظر عن شكل الشرطات/المسافات
 // اللي اتكتب بيها الكود وقت إضافة المنتج.
@@ -130,7 +149,7 @@ function normalizeCode(str) {
 
 // GET /api/products - قائمة المنتجات مع بحث وفلترة
 router.get('/', async (req, res) => {
-  const { search, category_id, low_stock, is_active } = req.query;
+  const { search, search_field, category_id, low_stock, is_active, supplier_id } = req.query;
 
   function baseSql() {
     return `SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE 1=1`;
@@ -138,6 +157,11 @@ router.get('/', async (req, res) => {
   function extraFilters(sql, params) {
     if (category_id) { sql += ` AND p.category_id = ?`; params.push(category_id); }
     if (is_active !== undefined) { sql += ` AND p.is_active = ?`; params.push(is_active === 'true' || is_active === '1' ? 1 : 0); }
+    // فلترة "المنتجات المرتبطة بمورد معيّن" — بتستخدم جدول الربط supplier_products
+    if (supplier_id) {
+      sql += ` AND EXISTS (SELECT 1 FROM supplier_products sp WHERE sp.product_id = p.id AND sp.supplier_id = ?)`;
+      params.push(supplier_id);
+    }
     sql += ` ORDER BY p.created_at DESC`;
     return sql;
   }
@@ -145,14 +169,17 @@ router.get('/', async (req, res) => {
   let products;
 
   if (search) {
-    // المسار السريع أولاً: LIKE عادي على sku/barcode/name — بيستخدم الـ index
-    // الموجود على sku وbarcode مباشرة، وده اللي بيغطي أغلب حالات البحث
-    // (الكود اتكتب بنفس الشكل المخزّن، أو بحث بالاسم).
+    // بحث محدَّد الحقل (search_field): لو المستخدم حدد "كود" أو "باركود" أو
+    // "اسم" بالذات، البحث بيقتصر على العمود ده بس — وده اللي بيمنع مشكلة
+    // زي البحث عن "966" فيرجع منتج باركوده "...966" غلط بدل الكود المقصود.
+    // من غير تحديد، البحث بيفضل شامل الثلاثة زي ما هو معتاد.
     let sql = baseSql();
     const params = [];
-    sql += ` AND (p.name LIKE ? OR p.sku LIKE ? OR p.barcode LIKE ?)`;
     const term = `%${search}%`;
-    params.push(term, term, term);
+    if (search_field === 'name') { sql += ` AND p.name LIKE ?`; params.push(term); }
+    else if (search_field === 'sku') { sql += ` AND p.sku LIKE ?`; params.push(term); }
+    else if (search_field === 'barcode') { sql += ` AND p.barcode LIKE ?`; params.push(term); }
+    else { sql += ` AND (p.name LIKE ? OR p.sku LIKE ? OR p.barcode LIKE ?)`; params.push(term, term, term); }
     sql = extraFilters(sql, params);
     products = await all(sql, params);
 
@@ -160,18 +187,22 @@ router.get('/', async (req, res) => {
     // (شرطات/مسافات مختلفة) مش مطابق حرفياً لشكله في السيستم. هنا بس
     // بنعمل البحث الموحّد (normalized) اللي بيقارن الكود بعد تنضيفه من
     // الرموز، وده أبطأ شوية (بيقرا الجدول كله) فبنستخدمه كحل احتياطي فقط
-    // مش كل بحث، عشان محافظين على سرعة البحث العادي.
-    if (products.length === 0) {
+    // مش كل بحث، عشان محافظين على سرعة البحث العادي. لو المستخدم حدد حقل
+    // بعينه، البديل بيفضل محترم لنفس الحقل.
+    if (products.length === 0 && search_field !== 'name') {
       const normTerm = normalizeCode(search);
       if (normTerm) {
         let fbSql = `
           SELECT p.*, c.name as category_name FROM products p
           LEFT JOIN categories c ON p.category_id = c.id
-          WHERE (
-            REPLACE(REPLACE(REPLACE(UPPER(p.sku), '-', ''), ' ', ''), '_', '') LIKE ?
-            OR REPLACE(REPLACE(REPLACE(UPPER(p.barcode), '-', ''), ' ', ''), '_', '') LIKE ?
-          )`;
-        const fbParams = [`%${normTerm}%`, `%${normTerm}%`];
+          WHERE (`;
+        const fbParams = [];
+        const skuCond = `REPLACE(REPLACE(REPLACE(UPPER(p.sku), '-', ''), ' ', ''), '_', '') LIKE ?`;
+        const barcodeCond = `REPLACE(REPLACE(REPLACE(UPPER(p.barcode), '-', ''), ' ', ''), '_', '') LIKE ?`;
+        if (search_field === 'sku') { fbSql += skuCond; fbParams.push(`%${normTerm}%`); }
+        else if (search_field === 'barcode') { fbSql += barcodeCond; fbParams.push(`%${normTerm}%`); }
+        else { fbSql += `${skuCond} OR ${barcodeCond}`; fbParams.push(`%${normTerm}%`, `%${normTerm}%`); }
+        fbSql += `)`;
         fbSql = extraFilters(fbSql, fbParams);
         products = await all(fbSql, fbParams);
       }
@@ -184,6 +215,7 @@ router.get('/', async (req, res) => {
   }
 
   products = await attachStockSummary(products, req);
+  products = await attachSupplierTags(products);
 
   // فلترة نواقص المخزون (تتم بعد حساب الكمية الإجمالية)
   if (low_stock === 'true') {
@@ -210,12 +242,13 @@ router.get('/:id', async (req, res) => {
   if (!product) return res.status(404).json({ error: 'المنتج غير موجود' });
 
   const [withStock] = await attachStockSummary([product], req);
+  const [withSuppliers] = await attachSupplierTags([withStock]);
 
   if (!req.user.can_view_cost_price && req.user.role !== 'admin') {
-    delete withStock.cost_price;
+    delete withSuppliers.cost_price;
   }
 
-  res.json({ product: withStock });
+  res.json({ product: withSuppliers });
 });
 
 // GET /api/products/barcode/:barcode - البحث عن منتج بالباركود (للاستخدام مع قارئ الباركود)

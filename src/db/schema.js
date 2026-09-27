@@ -988,6 +988,28 @@ module.exports.createPhase4Schema = createPhase4Schema;
 module.exports.migratePerformanceIndexes = migratePerformanceIndexes;
 module.exports.migrateProductListPerformanceIndexes = migrateProductListPerformanceIndexes;
 
+// ─── ربط المنتجات بالموردين (Supplier ↔ Products) ───
+// جدول ربط بسيط (many-to-many): مورد واحد ممكن يبقى مرتبط بأكتر من منتج،
+// والمنتج ممكن ييجي من أكتر من مورد (زي منتجات مشتركة بين فتوح وأوشينج).
+// ده استخدام داخلي بحت لموظفي السيستم (تصنيف/فلترة) — مالوش أي علاقة
+// بالفاتورة أو بما بيشوفه العميل.
+async function migrateSupplierProductLinks() {
+  await run(`
+    CREATE TABLE IF NOT EXISTS supplier_products (
+      id SERIAL PRIMARY KEY,
+      supplier_id INTEGER NOT NULL REFERENCES suppliers(id) ON DELETE CASCADE,
+      product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+      created_by INTEGER,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      UNIQUE(supplier_id, product_id)
+    );
+  `);
+  await run(`CREATE INDEX IF NOT EXISTS idx_supplier_products_supplier ON supplier_products(supplier_id);`);
+  await run(`CREATE INDEX IF NOT EXISTS idx_supplier_products_product  ON supplier_products(product_id);`);
+  console.log('✓ تم التأكد من جدول ربط المنتجات بالموردين (supplier_products)');
+}
+module.exports.migrateSupplierProductLinks = migrateSupplierProductLinks;
+
 // ─── جرد المخزون الفعلي (Physical Inventory Count) ───
 // جداول جديدة ومعزولة تماماً — لا تلمس products / locations / inventory /
 // stock_movements الموجودة. الجرد يبقى "مسودة" في الجدولين دول لحد ما

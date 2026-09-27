@@ -1,0 +1,73 @@
+﻿Error Type,Affected Row(s),Description,Resolution Applied
+Misattached image (off-by-one row),121 -> 122,Family 'R-U807': image for '800*300-GD-APP' was pasted into row 121 ('600-CPG-APP') instead of row 122,Reassigned image to row 122; row 121 left imageless
+Misattached image (off-by-one row),187 -> 188,Family 'HT-42001-400': image for 'BK+GD' was pasted into row 187 ('CPG') instead of row 188,Reassigned image to row 188; row 187 left imageless
+Misattached image (off-by-one row),229 -> 230,"Family 'HT-818 
+(HT-106-3)': image for 'APP-BK' was pasted into row 229 ('APP-CF') instead of row 230",Reassigned image to row 230; row 229 left imageless
+Misattached image (off-by-one row),238 -> 239,"Family 'HT-819
+(HT-106-3-C10)': image for 'APP-BK' was pasted into row 238 ('APP-FGD') instead of row 239",Reassigned image to row 239; row 238 left imageless
+Misattached image (off-by-one row),252 -> 254,Family 'HT-106-C10': image for 'MP3-BK-APP' was pasted into row 252 ('MP3-WH-APP') instead of row 254,Reassigned image to row 254; row 252 left imageless
+Misattached image (off-by-one row),281 -> 284,Family 'HT-145-G23': image for 'FGD' was pasted into row 281 ('BK') instead of row 284,Reassigned image to row 284; row 281 left imageless
+Misattached image (off-by-one row),287 -> 290,Family 'HT-146': image for 'APP-GD' was pasted into row 287 ('APP-WH') instead of row 290,Reassigned image to row 290; row 287 left imageless
+Misattached image (off-by-one row),323 -> 324,Family 'HT-150-G40': image for 'APP-FGD' was pasted into row 323 ('APP-BK') instead of row 324,Reassigned image to row 324; row 323 left imageless
+Misattached image (off-by-one row),327 -> 330,Family 'HT-151-G33': image for 'APP-FGD' was pasted into row 327 ('APP-WH') instead of row 330,Reassigned image to row 330; row 327 left imageless
+Misattached image (off-by-one row),364 -> 366,Family 'HT-170-C2': image for 'APP-BK' was pasted into row 364 ('APP-FGD') instead of row 366,Reassigned image to row 366; row 364 left imageless
+Misattached image (off-by-one row),368 -> 370,Family 'HT-171-C2': image for 'APP-FGD' was pasted into row 368 ('APP-WH') instead of row 370,Reassigned image to row 370; row 368 left imageless
+Misattached image (off-by-one row),371 -> 372,Family 'HT-802': image for 'APP-FGD' was pasted into row 371 ('APP-BK') instead of row 372,Reassigned image to row 372; row 371 left imageless
+Misattached image (off-by-one row),376 -> 377,Family 'HT-803': image for 'APP-BK' was pasted into row 376 ('APP-WH') instead of row 377,Reassigned image to row 377; row 376 left imageless
+Misattached image (off-by-one row),378 -> 381,Family 'HT-804': image for 'APP-FGD' was pasted into row 378 ('APP-WH') instead of row 381,Reassigned image to row 381; row 378 left imageless
+Misattached image (off-by-one row),382 -> 384,Family 'HT-805': image for 'APP-FGD' was pasted into row 382 ('APP-BK') instead of row 384,Reassigned image to row 384; row 382 left imageless
+Misattached image (off-by-one row),387 -> 388,Family 'HT-806': image for 'APP-FGD' was pasted into row 387 ('APP-BK') instead of row 388,Reassigned image to row 388; row 387 left imageless
+Misattached image (off-by-one row),393 -> 396,Family 'HT-807': image for 'APP-BK' was pasted into row 393 ('APP-WH') instead of row 396,Reassigned image to row 396; row 393 left imageless
+Misattached image (off-by-one row),421 -> 422,Family 'HT-816': image for 'APP-FGD' was pasted into row 421 ('APP-BK') instead of row 422,Reassigned image to row 422; row 421 left imageless
+Misattached image (off-by-one row),428 -> 429,Family 'HT-820': image for 'APP-BK' was pasted into row 428 ('APP-WH') instead of row 429,Reassigned image to row 429; row 428 left imageless
+Misattached image (off-by-one row),430 -> 432,Family 'HT-821': image for 'APP-BK' was pasted into row 430 ('APP-WH') instead of row 432,Reassigned image to row 432; row 430 left imageless
+Misattached image (off-by-one row),434 -> 435,Family 'HT-823': image for 'APP-BK' was pasted into row 434 ('APP-FGD') instead of row 435,Reassigned image to row 435; row 434 left imageless
+Misattached image (off-by-one row),446 -> 448,Family 'HT-828': image for 'APP-FGD' was pasted into row 446 ('APP-BK') instead of row 448,Reassigned image to row 448; row 446 left imageless
+Misattached image (off-by-one row),451 -> 452,Family 'HT-830': image for 'APP-FGD' was pasted into row 451 ('APP-WH') instead of row 452,Reassigned image to row 452; row 451 left imageless
+Misattached image (off-by-one row),458 -> 460,Family 'HT-834': image for 'APP-FGD' was pasted into row 458 ('APP-WH') instead of row 460,Reassigned image to row 460; row 458 left imageless
+Misattached image (off-by-one row),474 -> 476,Family 'HT-840': image for 'APP-FGD' was pasted into row 474 ('APP-BK') instead of row 476,Reassigned image to row 476; row 474 left imageless
+Misattached image (off-by-one row),478 -> 480,Family 'HT-841': image for 'APP-FGD' was pasted into row 478 ('APP-WH') instead of row 480,Reassigned image to row 480; row 478 left imageless
+Misattached image (off-by-one row),483 -> 484,Family 'HT-843': image for 'APP-FGD' was pasted into row 483 ('APP-BK') instead of row 484,Reassigned image to row 484; row 483 left imageless
+Misattached image (off-by-one row),489 -> 490,Family 'HT-845': image for 'APP-FGD' was pasted into row 489 ('APP-BK') instead of row 490,Reassigned image to row 490; row 489 left imageless
+Misattached image (off-by-one row),492 -> 494,Family 'HT-846': image for 'APP-FGD' was pasted into row 492 ('APP-WH') instead of row 494,Reassigned image to row 494; row 492 left imageless
+Misattached image (off-by-one row),497 -> 500,Family 'HT-848-G33': image for 'FGD' was pasted into row 497 ('BK') instead of row 500,Reassigned image to row 500; row 497 left imageless
+Misattached image (off-by-one row),504 -> 505,Family 'HT-849-G33': image for 'APP-BK' was pasted into row 504 ('APP-FGD') instead of row 505,Reassigned image to row 505; row 504 left imageless
+Misattached image (off-by-one row),509 -> 511,Family 'HT-850-G33': image for 'FGD' was pasted into row 509 ('BK') instead of row 511,Reassigned image to row 511; row 509 left imageless
+Misattached image (off-by-one row),513 -> 515,Family 'HT-850': image for 'FGD' was pasted into row 513 ('BK') instead of row 515,Reassigned image to row 515; row 513 left imageless
+Misattached image (off-by-one row),521 -> 522,Family 'HT-853': image for 'APP-FGD' was pasted into row 521 ('APP-BK') instead of row 522,Reassigned image to row 522; row 521 left imageless
+Misattached image (off-by-one row),537 -> 539,Family 'HT-867': image for 'FGD' was pasted into row 537 ('BK') instead of row 539,Reassigned image to row 539; row 537 left imageless
+Misattached image (off-by-one row),543 -> 545,Family 'HT-869': image for 'FGD' was pasted into row 543 ('BK') instead of row 545,Reassigned image to row 545; row 543 left imageless
+Misattached image (off-by-one row),578 -> 579,Family 'HT-881': image for 'APP-FGD' was pasted into row 578 ('APP-BK') instead of row 579,Reassigned image to row 579; row 578 left imageless
+Misattached image (off-by-one row),583 -> 584,Family 'HT-885': image for 'APP-FGD' was pasted into row 583 ('APP-WH') instead of row 584,Reassigned image to row 584; row 583 left imageless
+Misattached image (off-by-one row),587 -> 588,Family 'HT-886': image for 'APP-FGD' was pasted into row 587 ('APP-WH') instead of row 588,Reassigned image to row 588; row 587 left imageless
+Misattached image (off-by-one row),604 -> 605,Family 'HT-893': image for 'DZ-22-APP-FGD' was pasted into row 604 ('DZ-22-APP-BK') instead of row 605,Reassigned image to row 605; row 604 left imageless
+Misattached image (off-by-one row),611 -> 612,Family 'HT-898': image for 'T42-APP-BK' was pasted into row 611 ('A-APP-FGD') instead of row 612,Reassigned image to row 612; row 611 left imageless
+Misattached image (off-by-one row),613 -> 614,Family 'HT-900': image for 'APP-T40-FGD' was pasted into row 613 ('APP-T40-BK') instead of row 614,Reassigned image to row 614; row 613 left imageless
+Misattached image (off-by-one row),615 -> 616,Family 'HT-901': image for 'APP-T30-FGD' was pasted into row 615 ('APP-T30-BK') instead of row 616,Reassigned image to row 616; row 615 left imageless
+Misattached image (off-by-one row),620 -> 621,Family 'HT-904': image for 'Z-004-APP-FGD' was pasted into row 620 ('Z-004-APP-BK') instead of row 621,Reassigned image to row 621; row 620 left imageless
+Misattached image (off-by-one row),622 -> 623,Family 'HT-905': image for 'T-34-APP-FGD' was pasted into row 622 ('T-34-APP-BK') instead of row 623,Reassigned image to row 623; row 622 left imageless
+Misattached image (off-by-one row),628 -> 629,Family 'HT-906': image for 'Z-005-APP-FGD' was pasted into row 628 ('Z-005-APP-BK') instead of row 629,Reassigned image to row 629; row 628 left imageless
+Misattached image (off-by-one row),646 -> 647,Family 'HT-909': image for 'Z-005-APP-FGD' was pasted into row 646 ('Z-005-APP-BK') instead of row 647,Reassigned image to row 647; row 646 left imageless
+Misattached image (off-by-one row),657 -> 658,Family 'HT-915': image for 'G18-Z034-APP-FGD' was pasted into row 657 ('G18-(A)-APP-BK') instead of row 658,Reassigned image to row 658; row 657 left imageless
+Misattached image (off-by-one row),659 -> 660,Family 'HT-915': image for 'G23-(A)-APP-BK' was pasted into row 659 ('G23-(A)-APP-FGD') instead of row 660,Reassigned image to row 660; row 659 left imageless
+Misattached image (off-by-one row),682 -> 684,Family 'HT-925': image for 'APP-FGD' was pasted into row 682 ('APP-BK') instead of row 684,Reassigned image to row 684; row 682 left imageless
+Misattached image (off-by-one row),738 -> 740,Family 'HT-960': image for 'APP-FGD' was pasted into row 738 ('APP-BK') instead of row 740,Reassigned image to row 740; row 738 left imageless
+Misattached image (off-by-one row),741 -> 742,Family 'HT-963': image for 'APP-CPG' was pasted into row 741 ('APP-FGD') instead of row 742,Reassigned image to row 742; row 741 left imageless
+Misattached image (off-by-one row),755 -> 757,Family 'HT-980': image for 'APP-FGD' was pasted into row 755 ('APP-BK') instead of row 757,Reassigned image to row 757; row 755 left imageless
+Misattached image (off-by-one row),780 -> 781,Family 'HT-1003': image for 'APP-FGD' was pasted into row 780 ('APP-BK') instead of row 781,Reassigned image to row 781; row 780 left imageless
+Misattached image (off-by-one row),783 -> 784,Family 'HT-1005': image for 'Z057-APP-FGD' was pasted into row 783 ('Z057-APP-BK') instead of row 784,Reassigned image to row 784; row 783 left imageless
+Misattached image (off-by-one row),791 -> 792,Family 'HT-1010': image for 'Z029-APP-FGD' was pasted into row 791 ('Z029-APP-BK') instead of row 792,Reassigned image to row 792; row 791 left imageless
+Misattached image (off-by-one row),795 -> 796,Family 'HT-1012': image for 'Z029-APP-FGD' was pasted into row 795 ('Z029-APP-BK') instead of row 796,Reassigned image to row 796; row 795 left imageless
+Misattached image (off-by-one row),797 -> 798,Family 'HT-1013': image for 'Z036-APP-FGD' was pasted into row 797 ('Z036-APP-BK') instead of row 798,Reassigned image to row 798; row 797 left imageless
+Misattached image (off-by-one row),802 -> 803,Family 'HT-1016': image for 'APP-FGD' was pasted into row 802 ('APP-BK') instead of row 803,Reassigned image to row 803; row 802 left imageless
+Misattached image (off-by-one row),809 -> 810,Family 'HT-1027': image for 'A-APP-FGD' was pasted into row 809 ('A-APP-BK') instead of row 810,Reassigned image to row 810; row 809 left imageless
+Misattached image (off-by-one row),929 -> 930,Family 'RL-666': image for '(A)-APP-FGD' was pasted into row 929 ('(A)-APP-BK') instead of row 930,Reassigned image to row 930; row 929 left imageless
+Misattached image (off-by-one row),971 -> 972,Family 'RL-729-B': image for 'APP-FGD' was pasted into row 971 ('APP-BK') instead of row 972,Reassigned image to row 972; row 971 left imageless
+Misattached image (off-by-one row),1042 -> 1043,Family 'R-HTB202': image for 'BK' was pasted into row 1042 ('FGD') instead of row 1043,Reassigned image to row 1043; row 1042 left imageless
+Misattached image (off-by-one row),1053 -> 1055,Family 'R-HTB209': image for 'FGD' was pasted into row 1053 ('BK') instead of row 1055,Reassigned image to row 1055; row 1053 left imageless
+Misattached image (off-by-one row),1062 -> 1063,Family 'R-HTB211': image for 'BK' was pasted into row 1062 ('FGD') instead of row 1063,Reassigned image to row 1063; row 1062 left imageless
+Misattached image (off-by-one row),1065 -> 1066,Family 'R-HTB213': image for 'FGD' was pasted into row 1065 ('BK') instead of row 1066,Reassigned image to row 1066; row 1065 left imageless
+Duplicate image (copy-paste error),"336, 338","Row 338 (Z-007-FGD) contains an exact pixel-duplicate of row 336's photo (Z-003-BK), not its own product",Row 338 left imageless; true Z-007-FGD photo not found anywhere in dataset
+"Corrupted alt-text metadata (UUID, not a product code)",66-91 (26 rows),"descr field contains a random UUID string instead of a product code, and the shared thumbnail (image53.jpeg) is only 111x111px - too small to read visually",No code could be recovered from image or metadata for this block; SKU relies solely on Excel columns (الكود+المقاس-اللون)
+Shared/reused representative photo across many distinct SKUs,59-65 (X18xxx series),"Same small thumbnail (image6.jpeg, 144x145px) used for 7 different item-number rows in the X18xxx family",Treated as a genuine shared catalog photo (not necessarily an error) but flagged since individual variant appearance can't be confirmed
+Ambiguous dual-code family field,"many (~15 rows, e.g. 229/230, 238/239, 268, 477)",Family cell contains two different code representations (e.g. 'HT-818 (HT-106-3)') without indicating which is canonical,Primary (first-listed) code used for SKU; alternate stored as cross-reference note; flagged in Group C
